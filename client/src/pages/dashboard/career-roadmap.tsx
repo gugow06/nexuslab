@@ -6,31 +6,31 @@ import { motion } from "framer-motion";
 
 const roadmapSteps = [
   {
-    title: "Junior Product Manager",
-    description: "Your current position",
-    skills: ["Product Strategy", "User Research", "Agile Methodologies"],
-    timeframe: "Current",
+    title: "Gerente de Produto Júnior",
+    description: "Sua posição atual",
+    skills: ["Estratégia de Produto", "Pesquisa com Usuários", "Metodologias Ágeis"],
+    timeframe: "Atual",
     status: "current",
   },
   {
-    title: "Product Manager",
-    description: "Master core product management skills",
-    skills: ["Data Analysis", "Stakeholder Management", "Feature Prioritization"],
-    timeframe: "6-12 months",
+    title: "Gerente de Produto",
+    description: "Domine habilidades essenciais de gestão de produto",
+    skills: ["Análise de Dados", "Gestão de Stakeholders", "Priorização de Funcionalidades"],
+    timeframe: "6-12 meses",
     status: "in-progress",
   },
   {
-    title: "Senior Product Manager",
-    description: "Lead product initiatives and mentor others",
-    skills: ["Strategic Planning", "Team Leadership", "Market Analysis"],
-    timeframe: "12-18 months",
+    title: "Gerente de Produto Sênior",
+    description: "Lidere iniciativas de produto e mentore outros",
+    skills: ["Planejamento Estratégico", "Liderança de Equipe", "Análise de Mercado"],
+    timeframe: "12-18 meses",
     status: "pending",
   },
   {
-    title: "Director of Product",
-    description: "Your target position",
-    skills: ["Vision Setting", "Cross-functional Leadership", "Business Strategy"],
-    timeframe: "24-36 months",
+    title: "Diretor de Produto",
+    description: "Sua posição-alvo",
+    skills: ["Definição de Visão", "Liderança Multifuncional", "Estratégia de Negócios"],
+    timeframe: "24-36 meses",
     status: "target",
   },
 ];
@@ -40,22 +40,22 @@ export default function CareerRoadmap() {
     <div className="space-y-8">
       <div>
         <div className="flex items-center justify-between mb-2">
-          <h1 className="text-4xl font-bold">Career Roadmap</h1>
+          <h1 className="text-4xl font-bold">Roadmap de Carreira</h1>
           <Button data-testid="button-regenerate-roadmap">
             <Sparkles className="mr-2 h-4 w-4" />
-            Regenerate with AI
+            Regenerar com IA
           </Button>
         </div>
         <p className="text-muted-foreground text-lg">
-          Your personalized path from Junior Product Manager to Director of Product
+          Seu caminho personalizado de Gerente de Produto Júnior a Diretor de Produto
         </p>
       </div>
 
       <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
         <CardHeader>
-          <CardTitle>AI-Generated Career Path</CardTitle>
+          <CardTitle>Caminho de Carreira Gerado por IA</CardTitle>
           <CardDescription>
-            Based on your skills, experience, and target role, Nexus.AI has created this personalized roadmap
+            Com base em suas habilidades, experiência e função-alvo, a Nexus.AI criou este roadmap personalizado
           </CardDescription>
         </CardHeader>
       </Card>
@@ -117,7 +117,7 @@ export default function CareerRoadmap() {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold mb-3">Required Skills</h4>
+                    <h4 className="font-semibold mb-3">Habilidades Necessárias</h4>
                     <div className="flex flex-wrap gap-2">
                       {step.skills.map((skill, skillIndex) => (
                         <Badge key={skillIndex} variant="outline" data-testid={`badge-skill-${index}-${skillIndex}`}>
@@ -128,7 +128,7 @@ export default function CareerRoadmap() {
                   </div>
                   {step.status === "in-progress" && (
                     <Button variant="outline" data-testid={`button-view-plan-${index}`}>
-                      View Learning Plan <ArrowRight className="ml-2 h-4 w-4" />
+                      Ver Plano de Aprendizado <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   )}
                 </div>
@@ -140,24 +140,24 @@ export default function CareerRoadmap() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Next Steps</CardTitle>
+          <CardTitle>Próximos Passos</CardTitle>
           <CardDescription>
-            Focus on these actions to progress along your career path
+            Concentre-se nestas ações para progredir em sua carreira
           </CardDescription>
         </CardHeader>
         <CardContent>
           <ul className="space-y-3">
             <li className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-              <span>Complete "Data Analysis Fundamentals" trail to strengthen analytical skills</span>
+              <span>Complete a trilha "Fundamentos de Análise de Dados" para fortalecer habilidades analíticas</span>
             </li>
             <li className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-              <span>Take the "Stakeholder Management" digital lab simulation</span>
+              <span>Faça a simulação de laboratório digital "Gestão de Stakeholders"</span>
             </li>
             <li className="flex items-start gap-3">
               <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-              <span>Apply to Product Manager positions that match your skill level</span>
+              <span>Candidate-se a posições de Gerente de Produto que correspondam ao seu nível de habilidade</span>
             </li>
           </ul>
         </CardContent>

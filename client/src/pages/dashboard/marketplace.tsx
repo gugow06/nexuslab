@@ -9,68 +9,68 @@ import { motion } from "framer-motion";
 const opportunities = [
   {
     id: 1,
-    title: "Senior Product Manager",
+    title: "Gerente de Produto Sênior",
     company: "TechCorp",
     location: "San Francisco, CA",
-    type: "full-time",
-    experienceLevel: "senior",
-    requirements: ["Product Strategy", "Data Analysis", "Team Leadership"],
-    description: "Lead product initiatives for our flagship platform serving 10M+ users",
+    type: "tempo-integral",
+    experienceLevel: "sênior",
+    requirements: ["Estratégia de Produto", "Análise de Dados", "Liderança de Equipe"],
+    description: "Lidere iniciativas de produto para nossa plataforma principal que serve mais de 10M de usuários",
     matchScore: 92,
   },
   {
     id: 2,
-    title: "Product Manager",
+    title: "Gerente de Produto",
     company: "InnovateLabs",
-    location: "Remote",
-    type: "full-time",
-    experienceLevel: "mid",
-    requirements: ["Agile Methodologies", "User Research", "Stakeholder Management"],
-    description: "Drive product development in fast-paced startup environment",
+    location: "Remoto",
+    type: "tempo-integral",
+    experienceLevel: "pleno",
+    requirements: ["Metodologias Ágeis", "Pesquisa com Usuários", "Gestão de Stakeholders"],
+    description: "Impulsione o desenvolvimento de produtos em ambiente de startup dinâmico",
     matchScore: 85,
   },
   {
     id: 3,
-    title: "Associate Product Manager",
+    title: "Gerente de Produto Associado",
     company: "DataFlow Inc",
-    location: "New York, NY",
-    type: "full-time",
-    experienceLevel: "entry",
-    requirements: ["Product Strategy", "Communication", "Analytics"],
-    description: "Join our APM program and learn from industry leaders",
+    location: "Nova York, NY",
+    type: "tempo-integral",
+    experienceLevel: "júnior",
+    requirements: ["Estratégia de Produto", "Comunicação", "Análise"],
+    description: "Junte-se ao nosso programa APM e aprenda com líderes do setor",
     matchScore: 78,
   },
   {
     id: 4,
-    title: "Product Consultant",
+    title: "Consultor de Produto",
     company: "Strategy Partners",
-    location: "Remote",
-    type: "contract",
-    experienceLevel: "senior",
-    requirements: ["Strategic Planning", "Business Strategy", "Client Management"],
-    description: "Help Fortune 500 companies transform their product portfolios",
+    location: "Remoto",
+    type: "contrato",
+    experienceLevel: "sênior",
+    requirements: ["Planejamento Estratégico", "Estratégia de Negócios", "Gestão de Clientes"],
+    description: "Ajude empresas Fortune 500 a transformar seus portfólios de produtos",
     matchScore: 88,
   },
   {
     id: 5,
-    title: "Director of Product",
+    title: "Diretor de Produto",
     company: "GrowthTech",
     location: "Austin, TX",
-    type: "full-time",
-    experienceLevel: "lead",
-    requirements: ["Vision Setting", "Cross-functional Leadership", "P&L Management"],
-    description: "Lead product organization and drive company-wide product strategy",
+    type: "tempo-integral",
+    experienceLevel: "líder",
+    requirements: ["Definição de Visão", "Liderança Multifuncional", "Gestão de P&L"],
+    description: "Lidere a organização de produto e impulsione a estratégia de produto em toda a empresa",
     matchScore: 70,
   },
   {
     id: 6,
-    title: "Product Manager Intern",
+    title: "Estagiário de Gerência de Produto",
     company: "StartupX",
     location: "Boston, MA",
-    type: "internship",
-    experienceLevel: "entry",
-    requirements: ["Learning Agility", "Communication", "Problem Solving"],
-    description: "Summer internship program with mentorship and hands-on experience",
+    type: "estágio",
+    experienceLevel: "júnior",
+    requirements: ["Agilidade de Aprendizado", "Comunicação", "Resolução de Problemas"],
+    description: "Programa de estágio de verão com mentoria e experiência prática",
     matchScore: 82,
   },
 ];
@@ -78,52 +78,52 @@ const opportunities = [
 const applications = [
   {
     id: 1,
-    title: "Senior Product Manager",
+    title: "Gerente de Produto Sênior",
     company: "TechCorp",
-    status: "interview",
+    status: "entrevista",
     appliedDate: "2024-05-10",
   },
   {
     id: 2,
-    title: "Product Manager",
+    title: "Gerente de Produto",
     company: "InnovateLabs",
-    status: "reviewing",
+    status: "em-análise",
     appliedDate: "2024-05-12",
   },
 ];
 
 const typeColors: Record<string, string> = {
-  "full-time": "bg-blue-500/10 text-blue-700 dark:text-blue-400",
-  "part-time": "bg-green-500/10 text-green-700 dark:text-green-400",
-  contract: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
-  internship: "bg-orange-500/10 text-orange-700 dark:text-orange-400",
+  "tempo-integral": "bg-blue-500/10 text-blue-700 dark:text-blue-400",
+  "meio-período": "bg-green-500/10 text-green-700 dark:text-green-400",
+  contrato: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
+  estágio: "bg-orange-500/10 text-orange-700 dark:text-orange-400",
 };
 
 const statusColors: Record<string, string> = {
-  applied: "bg-blue-500/10 text-blue-700 dark:text-blue-400",
-  reviewing: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
-  interview: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
-  offer: "bg-green-500/10 text-green-700 dark:text-green-400",
-  rejected: "bg-red-500/10 text-red-700 dark:text-red-400",
+  candidatado: "bg-blue-500/10 text-blue-700 dark:text-blue-400",
+  "em-análise": "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
+  entrevista: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
+  oferta: "bg-green-500/10 text-green-700 dark:text-green-400",
+  rejeitado: "bg-red-500/10 text-red-700 dark:text-red-400",
 };
 
 export default function Marketplace() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-4xl font-bold mb-2">Opportunity Marketplace</h1>
+        <h1 className="text-4xl font-bold mb-2">Mercado de Oportunidades</h1>
         <p className="text-muted-foreground text-lg">
-          Discover roles that match your skills and aspirations
+          Descubra vagas que combinam com suas habilidades e aspirações
         </p>
       </div>
 
       <Tabs defaultValue="explore" className="space-y-6">
         <TabsList>
           <TabsTrigger value="explore" data-testid="tab-explore">
-            Explore
+            Explorar
           </TabsTrigger>
           <TabsTrigger value="applications" data-testid="tab-applications">
-            My Applications ({applications.length})
+            Minhas Candidaturas ({applications.length})
           </TabsTrigger>
         </TabsList>
 
@@ -132,7 +132,7 @@ export default function Marketplace() {
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search opportunities..."
+                placeholder="Buscar oportunidades..."
                 className="pl-10"
                 data-testid="input-search-opportunities"
               />
@@ -167,7 +167,7 @@ export default function Marketplace() {
                         <div className="text-2xl font-bold text-primary mb-1">
                           {opportunity.matchScore}%
                         </div>
-                        <p className="text-xs text-muted-foreground">Match Score</p>
+                        <p className="text-xs text-muted-foreground">Compatibilidade</p>
                       </div>
                     </div>
                   </CardHeader>
@@ -190,17 +190,17 @@ export default function Marketplace() {
                       ))}
                       {opportunity.requirements.length > 3 && (
                         <Badge variant="outline" className="text-xs">
-                          +{opportunity.requirements.length - 3} more
+                          +{opportunity.requirements.length - 3} mais
                         </Badge>
                       )}
                     </div>
                     <div className="flex gap-3">
                       <Button className="flex-1" data-testid={`button-apply-${index}`}>
                         <Briefcase className="mr-2 h-4 w-4" />
-                        Apply Now
+                        Candidatar-se
                       </Button>
                       <Button variant="outline" data-testid={`button-details-${index}`}>
-                        View Details
+                        Ver Detalhes
                       </Button>
                     </div>
                   </CardContent>
@@ -215,8 +215,8 @@ export default function Marketplace() {
             <Card>
               <CardContent className="py-12 text-center">
                 <Briefcase className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground mb-4">No applications yet</p>
-                <Button variant="outline">Browse Opportunities</Button>
+                <p className="text-muted-foreground mb-4">Nenhuma candidatura ainda</p>
+                <Button variant="outline">Explorar Oportunidades</Button>
               </CardContent>
             </Card>
           ) : (
@@ -242,7 +242,7 @@ export default function Marketplace() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
-                      Applied {new Date(application.appliedDate).toLocaleDateString()}
+                      Candidatado em {new Date(application.appliedDate).toLocaleDateString('pt-BR')}
                     </p>
                   </CardContent>
                 </Card>

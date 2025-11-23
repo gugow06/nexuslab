@@ -8,32 +8,32 @@ import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { Link } from "wouter";
 
 const scenario = {
-  title: "Crisis Management Simulation",
+  title: "Simulação de Gerenciamento de Crise",
   description:
-    "Your team just discovered a critical security vulnerability 24 hours before a major product launch. The vulnerability affects user data, but fixing it requires delaying the launch. Key stakeholders are demanding you proceed as planned.",
+    "Sua equipe acabou de descobrir uma vulnerabilidade crítica de segurança 24 horas antes de um grande lançamento de produto. A vulnerabilidade afeta dados de usuários, mas corrigi-la requer atrasar o lançamento. As principais partes interessadas estão exigindo que você prossiga conforme planejado.",
   decisions: [
     {
       id: "delay-launch",
-      text: "Delay the launch to fix the vulnerability immediately",
-      impact: "Protects users but disappoints stakeholders and delays revenue",
+      text: "Atrasar o lançamento para corrigir a vulnerabilidade imediatamente",
+      impact: "Protege os usuários, mas desaponta as partes interessadas e atrasa a receita",
       points: 100,
     },
     {
       id: "partial-fix",
-      text: "Implement a temporary patch and proceed with launch",
-      impact: "Maintains timeline but introduces technical debt and risk",
+      text: "Implementar um patch temporário e prosseguir com o lançamento",
+      impact: "Mantém o cronograma, mas introduz débito técnico e risco",
       points: 60,
     },
     {
       id: "proceed-launch",
-      text: "Proceed with launch and fix the issue in the next sprint",
-      impact: "Keeps stakeholders happy but exposes users to risk",
+      text: "Prosseguir com o lançamento e corrigir o problema no próximo sprint",
+      impact: "Mantém as partes interessadas felizes, mas expõe os usuários ao risco",
       points: 20,
     },
     {
       id: "limited-rollout",
-      text: "Launch to a limited user group while fixing the vulnerability",
-      impact: "Balances risk and progress, but requires additional coordination",
+      text: "Lançar para um grupo limitado de usuários enquanto corrige a vulnerabilidade",
+      impact: "Equilibra risco e progresso, mas requer coordenação adicional",
       points: 85,
     },
   ],
@@ -50,18 +50,18 @@ export default function LabDetail() {
     if (decision) {
       setScore(decision.points);
       setAiFeedback(
-        `Based on your choice to "${decision.text.toLowerCase()}", you demonstrated ${
+        `Com base em sua escolha de "${decision.text.toLowerCase()}", você demonstrou ${
           decision.points >= 80
-            ? "excellent strategic thinking"
+            ? "excelente pensamento estratégico"
             : decision.points >= 60
-            ? "good judgment with room for improvement"
-            : "a decision that may need reconsideration"
+            ? "bom julgamento com espaço para melhorias"
+            : "uma decisão que pode precisar de reconsideração"
         }. ${
           decision.points >= 80
-            ? "This approach balances user safety with business needs effectively."
+            ? "Esta abordagem equilibra a segurança do usuário com as necessidades do negócio de forma eficaz."
             : decision.points >= 60
-            ? "Consider how to better balance short-term gains with long-term consequences."
-            : "User trust and security should be prioritized over short-term business metrics."
+            ? "Considere como equilibrar melhor ganhos de curto prazo com consequências de longo prazo."
+            : "A confiança e a segurança do usuário devem ser priorizadas sobre métricas de negócio de curto prazo."
         }`
       );
       setSubmitted(true);
@@ -74,7 +74,7 @@ export default function LabDetail() {
         <Link href="/dashboard/labs">
           <Button variant="ghost" className="mb-4" data-testid="button-back">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Labs
+            Voltar para Labs
           </Button>
         </Link>
         <div className="flex items-start justify-between gap-6">
@@ -82,9 +82,9 @@ export default function LabDetail() {
             <h1 className="text-4xl font-bold mb-2">{scenario.title}</h1>
             <div className="flex items-center gap-3 mb-4">
               <Badge variant="secondary" className="bg-red-500/10 text-red-700 dark:text-red-400">
-                Advanced
+                Avançado
               </Badge>
-              <Badge variant="secondary">Leadership</Badge>
+              <Badge variant="secondary">Liderança</Badge>
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function LabDetail() {
         <>
           <Card className="bg-gradient-to-br from-chart-3/10 to-chart-3/5 border-chart-3/20">
             <CardHeader>
-              <CardTitle>Scenario</CardTitle>
+              <CardTitle>Cenário</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-lg leading-relaxed">{scenario.description}</p>
@@ -103,9 +103,9 @@ export default function LabDetail() {
 
           <Card>
             <CardHeader>
-              <CardTitle>What would you do?</CardTitle>
+              <CardTitle>O que você faria?</CardTitle>
               <CardDescription>
-                Select your decision and submit to receive AI-powered feedback
+                Selecione sua decisão e envie para receber feedback gerado por IA
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -146,7 +146,7 @@ export default function LabDetail() {
                 disabled={!selectedDecision}
                 data-testid="button-submit-decision"
               >
-                Submit Decision
+                Enviar Decisão
               </Button>
             </CardContent>
           </Card>
@@ -157,17 +157,17 @@ export default function LabDetail() {
             <CardHeader>
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="h-6 w-6 text-primary" />
-                <CardTitle>Simulation Complete!</CardTitle>
+                <CardTitle>Simulação Completa!</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm text-muted-foreground mb-1">Your Score</p>
+                  <p className="text-sm text-muted-foreground mb-1">Sua Pontuação</p>
                   <p className="text-4xl font-bold">{score}/100</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground mb-2">AI Feedback</p>
+                  <p className="text-sm text-muted-foreground mb-2">Feedback da IA</p>
                   <p className="leading-relaxed">{aiFeedback}</p>
                 </div>
               </div>
@@ -176,15 +176,15 @@ export default function LabDetail() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Next Steps</CardTitle>
+              <CardTitle>Próximos Passos</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <Button className="w-full" variant="outline" onClick={() => setSubmitted(false)} data-testid="button-try-again">
-                Try Different Approach
+                Tentar Abordagem Diferente
               </Button>
               <Link href="/dashboard/labs">
                 <Button className="w-full" variant="outline" data-testid="button-explore-labs">
-                  Explore More Labs
+                  Explorar Mais Labs
                 </Button>
               </Link>
             </CardContent>

@@ -21,46 +21,46 @@ const leaderboard = [
 
 const challenges = [
   {
-    title: "Complete 3 Trail Modules",
-    description: "Finish any 3 modules from your active trails",
+    title: "Complete 3 Módulos de Trilha",
+    description: "Conclua 3 módulos de suas trilhas ativas",
     reward: 150,
     progress: 2,
     total: 3,
-    type: "daily",
+    type: "diário",
   },
   {
-    title: "Score 80+ on Any Lab",
-    description: "Achieve a high score in a digital lab simulation",
+    title: "Pontuação 80+ em Qualquer Lab",
+    description: "Alcance uma pontuação alta em uma simulação de laboratório digital",
     reward: 200,
     progress: 0,
     total: 1,
-    type: "daily",
+    type: "diário",
   },
   {
-    title: "Weekly Consistency",
-    description: "Log in and complete activities for 7 consecutive days",
+    title: "Consistência Semanal",
+    description: "Faça login e complete atividades por 7 dias consecutivos",
     reward: 500,
     progress: 4,
     total: 7,
-    type: "weekly",
+    type: "semanal",
   },
   {
-    title: "Skill Master",
-    description: "Reach 90% proficiency in any skill",
+    title: "Mestre de Habilidades",
+    description: "Alcance 90% de proficiência em qualquer habilidade",
     reward: 300,
     progress: 85,
     total: 90,
-    type: "achievement",
+    type: "conquista",
   },
 ];
 
 const achievements = [
-  { title: "First Steps", icon: Award, unlocked: true },
-  { title: "Trail Blazer", icon: TrendingUp, unlocked: true },
-  { title: "Lab Rat", icon: Zap, unlocked: true },
-  { title: "Streak Master", icon: Flame, unlocked: false },
-  { title: "Community Leader", icon: Trophy, unlocked: false },
-  { title: "Skill Collector", icon: Target, unlocked: false },
+  { title: "Primeiros Passos", icon: Award, unlocked: true },
+  { title: "Desbravador", icon: TrendingUp, unlocked: true },
+  { title: "Praticante de Lab", icon: Zap, unlocked: true },
+  { title: "Mestre da Sequência", icon: Flame, unlocked: false },
+  { title: "Líder da Comunidade", icon: Trophy, unlocked: false },
+  { title: "Colecionador de Habilidades", icon: Target, unlocked: false },
 ];
 
 export default function Community() {
@@ -72,9 +72,9 @@ export default function Community() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-4xl font-bold mb-2">Community 1%</h1>
+        <h1 className="text-4xl font-bold mb-2">Comunidade 1%</h1>
         <p className="text-muted-foreground text-lg">
-          Join the elite. Compete, grow, and achieve excellence.
+          Junte-se à elite. Compita, cresça e alcance a excelência.
         </p>
       </div>
 
@@ -83,13 +83,13 @@ export default function Community() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Trophy className="h-5 w-5 text-primary" />
-              Your Progress
+              Seu Progresso
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">Level {currentLevel}</span>
+                <span className="text-sm font-medium">Nível {currentLevel}</span>
                 <span className="text-sm text-muted-foreground">
                   {currentXP} / {nextLevelXP} XP
                 </span>
@@ -99,15 +99,15 @@ export default function Community() {
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center">
                 <p className="text-3xl font-bold text-primary">{currentXP}</p>
-                <p className="text-sm text-muted-foreground">Total XP</p>
+                <p className="text-sm text-muted-foreground">XP Total</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-chart-1">{currentLevel}</p>
-                <p className="text-sm text-muted-foreground">Level</p>
+                <p className="text-sm text-muted-foreground">Nível</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-orange-500">7</p>
-                <p className="text-sm text-muted-foreground">Day Streak</p>
+                <p className="text-sm text-muted-foreground">Dias de Sequência</p>
               </div>
             </div>
           </CardContent>
@@ -117,10 +117,10 @@ export default function Community() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Award className="h-5 w-5 text-chart-2" />
-              Achievements
+              Conquistas
             </CardTitle>
             <CardDescription>
-              {achievements.filter((a) => a.unlocked).length} / {achievements.length} unlocked
+              {achievements.filter((a) => a.unlocked).length} / {achievements.length} desbloqueadas
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -144,7 +144,7 @@ export default function Community() {
       </div>
 
       <div>
-        <h2 className="text-2xl font-semibold mb-6">Active Challenges</h2>
+        <h2 className="text-2xl font-semibold mb-6">Desafios Ativos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {challenges.map((challenge, index) => (
             <Card key={index} className="hover-elevate" data-testid={`card-challenge-${index}`}>
@@ -182,7 +182,7 @@ export default function Community() {
       </div>
 
       <div>
-        <h2 className="text-2xl font-semibold mb-6">Leaderboard</h2>
+        <h2 className="text-2xl font-semibold mb-6">Ranking</h2>
         <Card>
           <CardContent className="p-0">
             <div className="divide-y">
@@ -215,7 +215,7 @@ export default function Community() {
                   </Avatar>
                   <div className="flex-1">
                     <p className="font-semibold">{user.name}</p>
-                    <p className="text-sm text-muted-foreground">Level {user.level}</p>
+                    <p className="text-sm text-muted-foreground">Nível {user.level}</p>
                   </div>
                   <div className="text-right">
                     <p className="font-semibold">{user.xp.toLocaleString()}</p>

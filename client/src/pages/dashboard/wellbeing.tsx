@@ -27,11 +27,11 @@ const moodData = [
 ];
 
 const moodEmojis = [
-  { value: 1, icon: Frown, label: "Very Low", color: "text-red-500" },
-  { value: 2, icon: Frown, label: "Low", color: "text-orange-500" },
-  { value: 3, icon: Meh, label: "Okay", color: "text-yellow-500" },
-  { value: 4, icon: Smile, label: "Good", color: "text-green-500" },
-  { value: 5, icon: Smile, label: "Great", color: "text-emerald-500" },
+  { value: 1, icon: Frown, label: "Muito Baixo", color: "text-red-500" },
+  { value: 2, icon: Frown, label: "Baixo", color: "text-orange-500" },
+  { value: 3, icon: Meh, label: "Ok", color: "text-yellow-500" },
+  { value: 4, icon: Smile, label: "Bom", color: "text-green-500" },
+  { value: 5, icon: Smile, label: "Ótimo", color: "text-emerald-500" },
 ];
 
 export default function Wellbeing() {
@@ -55,10 +55,10 @@ export default function Wellbeing() {
       if (!response.ok) throw new Error("Failed to submit check-in");
 
       const data = await response.json();
-      setAiSuggestion(data.aiSuggestion || "Take care of yourself today!");
+      setAiSuggestion(data.aiSuggestion || "Cuide de si mesmo hoje!");
       setSubmitted(true);
     } catch (error) {
-      setAiSuggestion("Take a moment to reflect on your well-being. Remember to balance work and rest.");
+      setAiSuggestion("Reserve um momento para refletir sobre seu bem-estar. Lembre-se de equilibrar trabalho e descanso.");
       setSubmitted(true);
     }
   };
@@ -68,9 +68,9 @@ export default function Wellbeing() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-4xl font-bold mb-2">Well-being</h1>
+        <h1 className="text-4xl font-bold mb-2">Bem-estar</h1>
         <p className="text-muted-foreground text-lg">
-          Track your emotional health and maintain work-life balance
+          Acompanhe sua saúde emocional e mantenha o equilíbrio trabalho-vida
         </p>
       </div>
 
@@ -79,13 +79,13 @@ export default function Wellbeing() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Heart className="h-5 w-5 text-pink-500" />
-              Daily Check-in
+              Check-in Diário
             </CardTitle>
-            <CardDescription>How are you feeling today?</CardDescription>
+            <CardDescription>Como você está se sentindo hoje?</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-4">
-              <Label>Your Mood</Label>
+              <Label>Seu Humor</Label>
               <div className="flex items-center justify-center py-6">
                 {currentMoodEmoji && (
                   <currentMoodEmoji.icon
@@ -104,9 +104,9 @@ export default function Wellbeing() {
                 data-testid="slider-mood"
               />
               <div className="flex justify-between text-sm text-muted-foreground">
-                <span>Very Low</span>
-                <span>Okay</span>
-                <span>Great</span>
+                <span>Muito Baixo</span>
+                <span>Ok</span>
+                <span>Ótimo</span>
               </div>
               {currentMoodEmoji && (
                 <p className="text-center text-lg font-semibold">
@@ -116,10 +116,10 @@ export default function Wellbeing() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="note">Notes (Optional)</Label>
+              <Label htmlFor="note">Notas (Opcional)</Label>
               <Textarea
                 id="note"
-                placeholder="What's on your mind? Any thoughts or concerns?"
+                placeholder="O que está em sua mente? Algum pensamento ou preocupação?"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 rows={4}
@@ -134,7 +134,7 @@ export default function Wellbeing() {
               disabled={submitted}
               data-testid="button-submit-checkin"
             >
-              {submitted ? "Check-in Submitted" : "Submit Check-in"}
+              {submitted ? "Check-in Enviado" : "Enviar Check-in"}
             </Button>
           </CardContent>
         </Card>
@@ -149,13 +149,13 @@ export default function Wellbeing() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-primary" />
-                  AI Wellness Suggestion
+                  Sugestão de Bem-estar IA
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="leading-relaxed mb-4">{aiSuggestion}</p>
                 <Button variant="outline" className="w-full" data-testid="button-new-checkin" onClick={() => setSubmitted(false)}>
-                  New Check-in
+                  Novo Check-in
                 </Button>
               </CardContent>
             </Card>
@@ -165,9 +165,9 @@ export default function Wellbeing() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Mood Trends (Last 7 Days)</CardTitle>
+          <CardTitle>Tendências de Humor (Últimos 7 Dias)</CardTitle>
           <CardDescription>
-            Track your emotional patterns over time
+            Acompanhe seus padrões emocionais ao longo do tempo
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -209,29 +209,29 @@ export default function Wellbeing() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm font-medium">Average Mood</CardTitle>
+            <CardTitle className="text-sm font-medium">Humor Médio</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">4.1 / 5.0</div>
-            <p className="text-sm text-muted-foreground mt-1">This week</p>
+            <p className="text-sm text-muted-foreground mt-1">Esta semana</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm font-medium">Check-in Streak</CardTitle>
+            <CardTitle className="text-sm font-medium">Sequência de Check-ins</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">7 days</div>
-            <p className="text-sm text-muted-foreground mt-1">Keep it up!</p>
+            <div className="text-2xl font-bold">7 dias</div>
+            <p className="text-sm text-muted-foreground mt-1">Continue assim!</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm font-medium">Total Check-ins</CardTitle>
+            <CardTitle className="text-sm font-medium">Total de Check-ins</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">24</div>
-            <p className="text-sm text-muted-foreground mt-1">All time</p>
+            <p className="text-sm text-muted-foreground mt-1">Todo o tempo</p>
           </CardContent>
         </Card>
       </div>
