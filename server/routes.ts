@@ -113,6 +113,113 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/dashboard/stats", async (req, res) => {
+    try {
+      if (!req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const userId = req.session.userId;
+
+      const [
+        userSkills,
+        gamification,
+        labResults,
+        applications,
+        allTrails,
+        challenges,
+        wellbeingHistory,
+      ] = await Promise.all([
+        storage.getUserSkills(userId),
+        storage.getUserGamification(userId),
+        storage.getUserLabResults(userId),
+        storage.getUserApplications(userId),
+        storage.getAllTrails(),
+        storage.getActiveChallenges(),
+        storage.getUserWellbeingHistory(userId, 5),
+      ]);
+
+      const skillsCount = userSkills.length;
+      const xpTotal = gamification?.xpTotal || 0;
+      const level = gamification?.level || 1;
+      const streak = gamification?.streakDays || 0;
+      const labsCompleted = labResults.length;
+      const opportunitiesCount = applications.length;
+
+      const enrolledTrails = [];
+      for (const trail of allTrails) {
+        const progress = await storage.getUserTrailProgress(userId, trail.id);
+        if (progress) {
+          enrolledTrails.push({
+            ...trail,
+            progress: progress.progressPercentage || 0,
+          });
+        }
+      }
+
+      const active = enrolledTrails.slice(0, 3);
+
+      const todayChallenge = challenges.find(c => {
+        const today = new Date().toDateString();
+        const startDate = new Date(c.startDate).toDateString();
+        const endDate = new Date(c.endDate).toDateString();
+        return today >= startDate && today <= endDate;
+      });
+
+      const recommendations = [];
+      
+      if (active.length > 0) {
+        const highestProgress = active.reduce((max, trail) => 
+          trail.progress > max.progress ? trail : max
+        );
+        if (highestProgress.progress > 70) {
+          recommendations.push({
+            type: "trail",
+            title: `Complete '${highestProgress.title}' trail`,
+            description: `You're ${highestProgress.progress}% done! Finish to earn XP and unlock achievements`,
+            action: `/dashboard/trails/${highestProgress.id}`,
+          });
+        }
+      }
+
+      if (labsCompleted < 3) {
+        recommendations.push({
+          type: "lab",
+          title: "Try your first digital lab simulation",
+          description: "Put your skills to the test with hands-on scenario-based challenges",
+          action: "/dashboard/labs",
+        });
+      }
+
+      if (skillsCount < 5) {
+        recommendations.push({
+          type: "skill",
+          title: "Build your skills portfolio",
+          description: "Add skills to your passport to stand out to employers",
+          action: "/dashboard/skills-passport",
+        });
+      }
+
+      res.json({
+        stats: {
+          skillsAcquired: skillsCount,
+          xpEarned: xpTotal,
+          labsCompleted,
+          opportunities: opportunitiesCount,
+        },
+        level,
+        streak,
+        activeTrails: active,
+        dailyChallenge: todayChallenge || null,
+        recentWellbeing: wellbeingHistory.slice(0, 3),
+        recommendations: recommendations.slice(0, 3),
+      });
+    } catch (error) {
+      console.error("Dashboard stats error:", error);
+      res.status(500).json({ error: "Failed to fetch dashboard stats" });
+    }
+  });
+
   // ===== AI FEATURES =====
   app.post("/api/ai/career-route", async (req, res) => {
     try {
