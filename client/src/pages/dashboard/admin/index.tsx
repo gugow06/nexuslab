@@ -53,6 +53,23 @@ const moduleSchema = z.object({
     questions: z.array(z.any()).optional(),
   }),
   order: z.coerce.number().min(0, "Ordem deve ser maior ou igual a 0"),
+}).refine((data) => {
+  if (data.type === "video") {
+    return !!data.content.body && !!data.content.videoUrl;
+  }
+  if (data.type === "text") {
+    return !!data.content.body;
+  }
+  if (data.type === "quiz") {
+    return data.content.questions && data.content.questions.length > 0;
+  }
+  if (data.type === "challenge") {
+    return !!data.content.body;
+  }
+  return true;
+}, {
+  message: "Conteúdo inválido para o tipo de módulo selecionado",
+  path: ["content"],
 });
 
 type UserEditForm = z.infer<typeof userEditSchema>;

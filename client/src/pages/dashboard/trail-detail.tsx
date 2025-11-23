@@ -47,6 +47,15 @@ export default function TrailDetail() {
 
   const { data: progress, isLoading: isLoadingProgress } = useQuery<UserTrailProgress>({
     queryKey: ['/api/user/trail-progress', trailId],
+    queryFn: async () => {
+      if (!trailId) return { completedModules: [], progressPercentage: 0 };
+      const res = await fetch(`/api/user/trail-progress/${trailId}`, { credentials: "include" });
+      if (!res.ok) {
+        if (res.status === 404) return { completedModules: [], progressPercentage: 0 };
+        throw new Error("Failed to fetch progress");
+      }
+      return res.json();
+    },
     enabled: !!trailId,
   });
 
@@ -65,7 +74,6 @@ export default function TrailDetail() {
         : 0;
 
       await apiRequest("POST", `/api/trails/${trailId}/progress`, {
-        userId: "current",
         completedModules: newCompletedModules,
         progressPercentage,
       });
@@ -80,7 +88,7 @@ export default function TrailDetail() {
       toast({
         title: "Módulo concluído!",
         description: data?.progressPercentage === 100 
-          ? "🎉 Parabéns! Você concluiu toda a trilha!"
+          ? "Parabéns! Você concluiu toda a trilha!"
           : "Continue aprendendo para completar a trilha.",
       });
     },
