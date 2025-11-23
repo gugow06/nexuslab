@@ -26,14 +26,14 @@ export default function Register() {
     try {
       await registerUser({ name, email, password, currentPosition, targetPosition });
       toast({
-        title: "Account created!",
-        description: "Welcome to NexusLab. Let's start your journey.",
+        title: "Conta criada!",
+        description: "Bem-vindo ao NexusLab. Vamos começar sua jornada.",
       });
       setLocation("/dashboard");
     } catch (error) {
       toast({
-        title: "Registration failed",
-        description: error instanceof Error ? error.message : "An error occurred. Please try again.",
+        title: "Falha no cadastro",
+        description: error instanceof Error ? error.message : "Ocorreu um erro. Tente novamente.",
         variant: "destructive",
       });
     } finally {
@@ -51,19 +51,19 @@ export default function Register() {
             </div>
             <span className="text-xl font-bold">NexusLab</span>
           </div>
-          <CardTitle className="text-2xl">Create an account</CardTitle>
+          <CardTitle className="text-2xl">Criar uma conta</CardTitle>
           <CardDescription>
-            Join the top 1% of professionals transforming their careers
+            Junte-se ao top 1% de profissionais transformando suas carreiras
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor="name">Nome Completo</Label>
               <Input
                 id="name"
                 type="text"
-                placeholder="John Doe"
+                placeholder="João Silva"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -71,11 +71,11 @@ export default function Register() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">E-mail</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="voce@exemplo.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -83,7 +83,7 @@ export default function Register() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Senha</Label>
               <Input
                 id="password"
                 type="password"
@@ -94,15 +94,15 @@ export default function Register() {
                 data-testid="input-password"
               />
               <p className="text-xs text-muted-foreground">
-                Must be at least 8 characters
+                Deve ter pelo menos 8 caracteres
               </p>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="currentPosition">Current Position</Label>
+              <Label htmlFor="currentPosition">Cargo Atual</Label>
               <Input
                 id="currentPosition"
                 type="text"
-                placeholder="e.g., Junior Developer"
+                placeholder="ex: Desenvolvedor Júnior"
                 value={currentPosition}
                 onChange={(e) => setCurrentPosition(e.target.value)}
                 required
@@ -110,11 +110,11 @@ export default function Register() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="targetPosition">Target Position</Label>
+              <Label htmlFor="targetPosition">Cargo Almejado</Label>
               <Input
                 id="targetPosition"
                 type="text"
-                placeholder="e.g., Senior Developer"
+                placeholder="ex: Desenvolvedor Sênior"
                 value={targetPosition}
                 onChange={(e) => setTargetPosition(e.target.value)}
                 required
@@ -125,18 +125,18 @@ export default function Register() {
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Creating account...
+                  Criando conta...
                 </>
               ) : (
-                "Create Account"
+                "Criar Conta"
               )}
             </Button>
           </form>
           <div className="mt-6 text-center text-sm">
-            <span className="text-muted-foreground">Already have an account? </span>
+            <span className="text-muted-foreground">Já tem uma conta? </span>
             <Link href="/login">
               <a className="text-primary hover:underline" data-testid="link-login">
-                Sign in
+                Entrar
               </a>
             </Link>
           </div>
