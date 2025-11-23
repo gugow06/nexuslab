@@ -2,7 +2,7 @@
 
 ## 💡 Sobre o Projeto
 
-O **NexusLab** (Solução Nexio) é uma plataforma Full Stack projetada para enfrentar os desafios do **Futuro do Trabalho**. Em um cenário de avanços tecnológicos disruptivos, como a **Inteligência Artificial** e a **automação**, nossa solução visa garantir uma transição justa, inclusiva e sustentável para o mercado.
+O **NexusLab** é uma plataforma Full Stack projetada para enfrentar os desafios do **Futuro do Trabalho**. Em um cenário de avanços tecnológicos disruptivos, como a **Inteligência Artificial** e a **automação**, nossa solução visa garantir uma transição justa, inclusiva e sustentável para o mercado.
 
 Utilizamos a tecnologia para personalizar jornadas de **aprendizagem e requalificação**, combatendo as desigualdades e preparando jovens para carreiras que ainda estão surgindo.
 
