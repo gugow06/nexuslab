@@ -8,6 +8,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { AppSidebar } from "@/components/app-sidebar";
 import { AIChat } from "@/components/ai-chat";
+import { AuthProvider } from "@/lib/auth-context";
+import { ProtectedRoute } from "@/components/protected-route";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
 import Login from "@/pages/auth/login";
@@ -75,70 +77,94 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light">
-        <TooltipProvider>
-          <Switch>
-            <Route path="/" component={Landing} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/dashboard">
-              <DashboardLayout>
-                <DashboardHome />
-              </DashboardLayout>
-            </Route>
-            <Route path="/dashboard/career">
-              <DashboardLayout>
-                <CareerRoadmap />
-              </DashboardLayout>
-            </Route>
-            <Route path="/dashboard/trails">
-              <DashboardLayout>
-                <LearningTrails />
-              </DashboardLayout>
-            </Route>
-            <Route path="/dashboard/trails/:id">
-              <DashboardLayout>
-                <TrailDetail />
-              </DashboardLayout>
-            </Route>
-            <Route path="/dashboard/labs">
-              <DashboardLayout>
-                <DigitalLabs />
-              </DashboardLayout>
-            </Route>
-            <Route path="/dashboard/labs/:id">
-              <DashboardLayout>
-                <LabDetail />
-              </DashboardLayout>
-            </Route>
-            <Route path="/dashboard/skills">
-              <DashboardLayout>
-                <SkillsPassport />
-              </DashboardLayout>
-            </Route>
-            <Route path="/dashboard/community">
-              <DashboardLayout>
-                <Community />
-              </DashboardLayout>
-            </Route>
-            <Route path="/dashboard/wellbeing">
-              <DashboardLayout>
-                <Wellbeing />
-              </DashboardLayout>
-            </Route>
-            <Route path="/dashboard/marketplace">
-              <DashboardLayout>
-                <Marketplace />
-              </DashboardLayout>
-            </Route>
-            <Route path="/admin">
-              <DashboardLayout>
-                <AdminPanel />
-              </DashboardLayout>
-            </Route>
-            <Route component={NotFound} />
-          </Switch>
-          <Toaster />
-        </TooltipProvider>
+        <AuthProvider>
+          <TooltipProvider>
+            <Switch>
+              <Route path="/" component={Landing} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/dashboard">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <DashboardHome />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route path="/dashboard/career">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <CareerRoadmap />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route path="/dashboard/trails">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <LearningTrails />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route path="/dashboard/trails/:id">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <TrailDetail />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route path="/dashboard/labs">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <DigitalLabs />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route path="/dashboard/labs/:id">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <LabDetail />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route path="/dashboard/skills">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <SkillsPassport />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route path="/dashboard/community">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <Community />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route path="/dashboard/wellbeing">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <Wellbeing />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route path="/dashboard/marketplace">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <Marketplace />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route path="/admin">
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <AdminPanel />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              </Route>
+              <Route component={NotFound} />
+            </Switch>
+            <Toaster />
+          </TooltipProvider>
+        </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

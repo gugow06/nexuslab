@@ -6,6 +6,9 @@ import express, {
   Response,
   NextFunction,
 } from "express";
+import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
+import { Pool } from "@neondatabase/serverless";
 
 import { registerRoutes } from "./routes";
 
@@ -27,12 +30,48 @@ declare module 'http' {
     rawBody: unknown
   }
 }
+
+declare module 'express-session' {
+  interface SessionData {
+    userId: string;
+  }
+}
+
 app.use(express.json({
   verify: (req, _res, buf) => {
     req.rawBody = buf;
   }
 }));
 app.use(express.urlencoded({ extended: false }));
+
+// Session configuration
+if (!process.env.SESSION_SECRET) {
+  throw new Error("SESSION_SECRET environment variable must be set. Please add SESSION_SECRET to your environment variables.");
+}
+
+export const SESSION_COOKIE_NAME = "nexuslab.sid";
+
+const PgSession = connectPgSimple(session);
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+app.use(
+  session({
+    store: new PgSession({
+      pool,
+      createTableIfMissing: true,
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    name: SESSION_COOKIE_NAME,
+    cookie: {
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+    },
+  })
+);
 
 app.use((req, res, next) => {
   const start = Date.now();

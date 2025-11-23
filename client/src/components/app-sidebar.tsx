@@ -1,4 +1,4 @@
-import { Home, Map, BookOpen, FlaskConical, Award, Users, Briefcase, Heart, Settings, Shield } from "lucide-react";
+import { Home, Map, BookOpen, FlaskConical, Award, Users, Briefcase, Heart, Settings, Shield, LogOut } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import {
   Sidebar,
@@ -10,7 +10,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarHeader,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useAuth } from "@/lib/auth-context";
+import { Button } from "@/components/ui/button";
 
 const menuItems = [
   {
@@ -73,6 +77,13 @@ const adminItems = [
 
 export function AppSidebar() {
   const [location] = useLocation();
+  const { user, logout } = useAuth();
+  const [, setLocation] = useLocation();
+
+  const handleLogout = async () => {
+    await logout();
+    setLocation("/");
+  };
 
   const groupedItems = menuItems.reduce((acc, item) => {
     if (!acc[item.group]) {
@@ -81,6 +92,15 @@ export function AppSidebar() {
     acc[item.group].push(item);
     return acc;
   }, {} as Record<string, typeof menuItems>);
+
+  const userInitials = user?.name
+    ? user.name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2)
+    : "U";
 
   return (
     <Sidebar>
@@ -140,6 +160,28 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className="p-4 border-t">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-9 w-9">
+            <AvatarFallback className="bg-primary text-primary-foreground text-sm">
+              {userInitials}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium truncate">{user?.name || "User"}</p>
+            <p className="text-xs text-muted-foreground truncate">{user?.email || ""}</p>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleLogout}
+            data-testid="button-logout"
+            title="Logout"
+          >
+            <LogOut className="h-4 w-4" />
+          </Button>
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }
