@@ -1,0 +1,363 @@
+Perfeito. Aqui está a especificação completa e profissional, agora totalmente alinhada ao stack tecnológico que você pediu:
+	•	Next.js (App Router)
+	•	TailwindCSS
+	•	shadcn/ui
+	•	Lucide Icons
+	•	Framer Motion
+	•	Arquitetura modular + padrões de design moderno
+	•	Banco de dados altamente configurado (PostgreSQL / Supabase)
+	•	Módulos escaláveis, seguros e prontos para crescer
+
+⸻
+
+🚀 Especificação Final do MVP — NexusLab (Versão Técnica + Funcional)
+
+1. Stack Tecnológico Oficial
+
+Frontend
+	•	Next.js (versão 14+) com App Router
+	•	TailwindCSS para estilização rápida, responsiva e minimalista
+	•	shadcn/ui para componentes modernos, acessíveis e coesos
+	•	Lucide-react para ícones clean e padronizados
+	•	Framer Motion para animações suaves e microinterações
+	•	TanStack Query para gerenciamento de dados em cache
+	•	Zod para validação total do schema entre front e back
+	•	React Hook Form para formulários padronizados
+
+Backend
+	•	API Routes do Next.js ou camada Server Actions
+	•	Autenticação via Supabase Auth ou NextAuth.js
+	•	Postgres/Supabase como banco principal
+	•	Prisma ORM como camada de acesso ao banco
+	•	Edge Functions (opcional) para cálculos de IA escaláveis
+	•	Integração com OpenAI API (ou modelo open-source)
+
+Infraestrutura
+	•	Banco PostgreSQL altamente estruturado
+	•	Deploy em Vercel
+	•	Storage Supabase para assets (opções)
+	•	Logs e auditoria via Supabase Functions
+
+⸻
+
+🧱 2. Banco de Dados — Estrutura Profissional
+
+O banco é um dos pontos mais importantes do MVP, então ele deve ser:
+	•	Escalável
+	•	Normalizado
+	•	Com constraints fortes
+	•	Métricas de auditoria obrigatórias
+	•	Relacionamentos claros
+	•	Índices otimizados
+
+📌 Tabelas principais
+
+users
+	•	id (PK)
+	•	name
+	•	email (unique)
+	•	role (user/admin/company)
+	•	created_at, updated_at
+
+skills
+	•	id (PK)
+	•	name
+	•	category
+	•	description
+
+user_skills
+	•	id (PK)
+	•	user_id (FK → users)
+	•	skill_id (FK → skills)
+	•	level (0–100)
+	•	updated_at
+
+career_routes
+	•	id (PK)
+	•	user_id (FK → users)
+	•	current_position
+	•	target_position
+	•	steps (JSON)
+	•	created_at
+
+learning_trails
+	•	id (PK)
+	•	title
+	•	description
+	•	difficulty
+	•	created_at
+
+trail_modules
+	•	id (PK)
+	•	trail_id (FK)
+	•	title
+	•	type (video, texto, desafio)
+	•	content (JSON)
+	•	order
+
+user_trail_progress
+	•	id (PK)
+	•	user_id
+	•	trail_id
+	•	progress_percentage
+
+labs
+	•	id
+	•	name
+	•	description
+	•	scenario_data (JSON)
+	•	created_at
+
+lab_results
+	•	id
+	•	user_id
+	•	lab_id
+	•	score
+	•	decisions (JSON)
+
+opportunities
+	•	id
+	•	company_id
+	•	title
+	•	description
+	•	requirements (JSON)
+	•	created_at
+
+applications
+	•	id
+	•	user_id
+	•	opportunity_id
+	•	status
+
+wellbeing_logs
+	•	id
+	•	user_id
+	•	mood (1–5)
+	•	note
+	•	created_at
+
+Tudo com:
+	•	foreign keys
+	•	cascade delete quando apropriado
+	•	índices em FK
+	•	tabela de auditoria (log de ações)
+
+⸻
+
+🖥️ 3. Frontend (Design + UX + Frameworks)
+
+🎨 Layout e UI
+
+Usar:
+	•	Tailwind para toda a estrutura de layout
+	•	shadcn/ui para:
+	•	cards
+	•	inputs
+	•	modals
+	•	navbars
+	•	sheets
+	•	dropdowns
+	•	tabelas
+	•	badges
+	•	Lucide para ícones padronizados
+	•	Framer Motion:
+	•	transições de página
+	•	fade-in nos cards
+	•	microinterações de feedback
+
+⸻
+
+⚙️ 4. Funcionalidades do MVP — Versão Técnica
+
+🔹 1. Autenticação
+
+Must-have:
+	•	Login, cadastro, recuperação de senha
+	•	Magic link opcional (Supabase)
+	•	Middleware de proteção de rotas
+	•	Role-based access control (admin, user, company)
+
+⸻
+
+🔹 2. Nexus.AI (IA mentora)
+
+Backend:
+	•	Endpoint /api/ai/career-route
+	•	Integração OpenAI GPT-5 para:
+	•	análise de perfil inicial
+	•	sugestão de habilidades
+	•	construção de rota de carreira
+	•	Cache via Redis (opcional)
+
+Frontend:
+	•	Componente conversacional usando shadcn/ui + motion
+	•	Cards dinâmicos com recomendações
+
+⸻
+
+🔹 3. Mapa de Carreira
+	•	Componente React interativo (flow diagram)
+	•	Dados carregados via TanStack Query
+	•	IA atualiza rota automaticamente
+	•	Tailwind + motion para animações de conexões
+
+⸻
+
+🔹 4. Trilhas de Aprendizagem
+	•	Lista de trilhas
+	•	Página de trilha com módulos
+	•	Player de conteúdo
+	•	Barra de progresso
+	•	API para salvar progresso
+	•	Conclusão gera skills no banco
+
+⸻
+
+🔹 5. Labs Digitais (Simulações)
+
+Implementação MVP:
+	•	Interface baseada em múltipla escolha + dados reais
+	•	JSON de cenários carregado do backend
+	•	Score calculado em server-side action
+	•	Feedback baseado na IA
+
+Componentes:
+	•	Cards do shadcn
+	•	Sliders
+	•	Charts (Recharts opcional)
+
+⸻
+
+🔹 6. Passaporte de Competências
+	•	Página /skills
+	•	Cards com skills obtidas
+	•	Barra de proficiência
+	•	Exportação PDF (server action)
+	•	Dados vindos de user_skills
+
+⸻
+
+🔹 7. Comunidade 1%
+
+Elementos do MVP:
+	•	Sistema de XP
+	•	Desafios diários
+	•	Ranking básico
+	•	Página com:
+	•	mindset
+	•	trilhas sugeridas
+	•	progresso XP
+
+UI:
+	•	Cards + badges shadcn
+	•	Motion para animações
+
+⸻
+
+🔹 8. Bem-Estar
+	•	Check-in emocional com slider
+	•	IA retorna sugestão simples
+	•	Dashboard com gráfico (mood histórico)
+
+⸻
+
+🔹 9. Marketplace
+	•	Lista de oportunidades
+	•	Formulário de candidatura
+	•	Dashboard do usuário com status
+
+⸻
+
+🔹 10. Painel Administrativo
+
+Para criar/editar:
+	•	Trilhas
+	•	Módulos
+	•	Labs
+	•	Oportunidades
+	•	Usuários
+	•	Logs
+
+UI:
+	•	Tabela shadcn
+	•	Modal de edição
+	•	Auth com permissões RBAC
+
+⸻
+
+📐 5. Arquitetura de Pastas (Next.js App Router)
+
+src/
+ ├─ app/
+ │   ├─ (public)
+ │   ├─ dashboard/
+ │   ├─ auth/
+ │   ├─ api/
+ │   └─ layout.tsx
+ │
+ ├─ components/
+ │   ├─ ui/ (shadcn)
+ │   ├─ forms/
+ │   ├─ charts/
+ │   ├─ cards/
+ │
+ ├─ lib/
+ │   ├─ prisma.ts
+ │   ├─ auth.ts
+ │   ├─ validators/
+ │   └─ utils.ts
+ │
+ ├─ hooks/
+ ├─ services/
+ ├─ styles/
+ └─ types/
+
+
+⸻
+
+🧪 6. Segurança
+	•	Rate limiting nos endpoints de IA
+	•	Validação com Zod em tudo
+	•	Sanitização de input
+	•	Tokens JWT com expiração curta (se não usar Supabase)
+	•	RBAC obrigatório
+	•	HTTPS only
+
+⸻
+
+📊 7. Métricas de MVP
+	•	Engajamento nas trilhas
+	•	Uso dos labs
+	•	Skills adquiridas
+	•	Rotas criadas pela IA
+	•	Check-ins de bem-estar
+	•	Conversões no marketplace
+	•	Retenção 7/14/30 dias
+
+⸻
+
+🧵 8. Resultado Final
+
+O MVP terá:
+
+✔ Visual moderno e limpo
+✔ Performático (Next 14)
+✔ Animações profissionais
+✔ Acessibilidade nativa
+✔ Banco robusto e escalado
+✔ IA integrada ao core
+✔ Roteamento inteligente
+✔ Estrutura modular para o futuro
+
+⸻
+
+Se quiser, posso entregar também:
+
+🧩 Diagrama ER completo do banco
+📐 Arquitetura técnica detalhada
+🎨 Protótipo Figma usando UI shadcn
+🧑‍💻 Roadmap de desenvolvimento (3 meses)
+📦 Backlog estilo Jira
+📚 Documentação SRS (Software Requirements Specification)
+
+É só pedir!
