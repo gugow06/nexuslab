@@ -77,6 +77,7 @@ export interface IStorage {
   getTrail(id: number): Promise<LearningTrail | undefined>;
   getTrailModules(trailId: number): Promise<TrailModule[]>;
   getUserTrailProgress(userId: string, trailId: number): Promise<UserTrailProgress | undefined>;
+  getUserAllProgress(userId: string): Promise<UserTrailProgress[]>;
   updateTrailProgress(data: InsertUserTrailProgress): Promise<UserTrailProgress>;
   createTrail(data: InsertLearningTrail): Promise<LearningTrail>;
   createTrailModule(data: InsertTrailModule): Promise<TrailModule>;
@@ -214,6 +215,13 @@ export class DatabaseStorage implements IStorage {
       .from(userTrailProgress)
       .where(and(eq(userTrailProgress.userId, userId), eq(userTrailProgress.trailId, trailId)));
     return progress || undefined;
+  }
+
+  async getUserAllProgress(userId: string): Promise<UserTrailProgress[]> {
+    return await db
+      .select()
+      .from(userTrailProgress)
+      .where(eq(userTrailProgress.userId, userId));
   }
 
   async updateTrailProgress(data: InsertUserTrailProgress): Promise<UserTrailProgress> {

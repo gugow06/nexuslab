@@ -368,6 +368,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/user/trail-progress", async (req, res) => {
+    try {
+      if (!req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const progress = await storage.getUserAllProgress(req.session.userId);
+      res.json(progress);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch user progress" });
+    }
+  });
+
+  app.get("/api/user/trail-progress/:trailId", async (req, res) => {
+    try {
+      if (!req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const trailId = parseInt(req.params.trailId);
+      const progress = await storage.getUserTrailProgress(req.session.userId, trailId);
+      
+      res.json(progress || { completedModules: [], progressPercentage: 0 });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch trail progress" });
+    }
+  });
+
   // ===== LABS =====
   app.get("/api/labs", async (_req, res) => {
     try {
