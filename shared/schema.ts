@@ -12,8 +12,8 @@ export const users = pgTable("users", {
   password: text("password").notNull(),
   role: text("role", { enum: ["user", "admin", "company"] }).notNull().default("user"),
   avatar: text("avatar"),
-  currentPosition: text("current_position"),
-  targetPosition: text("target_position"),
+  currentPosition: text("current_position").notNull(),
+  targetPosition: text("target_position").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });

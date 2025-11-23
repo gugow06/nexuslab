@@ -5,11 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/lib/auth-context";
 import { Loader2 } from "lucide-react";
 
 export default function Login() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,8 +21,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      // TODO: Implement actual login logic in Task 3
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await login(email, password);
       toast({
         title: "Welcome back!",
         description: "You have successfully logged in.",
@@ -29,7 +30,7 @@ export default function Login() {
     } catch (error) {
       toast({
         title: "Login failed",
-        description: "Invalid email or password.",
+        description: error instanceof Error ? error.message : "Invalid email or password.",
         variant: "destructive",
       });
     } finally {

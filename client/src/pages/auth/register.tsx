@@ -5,14 +5,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/lib/auth-context";
 import { Loader2 } from "lucide-react";
 
 export default function Register() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const { register: registerUser } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [currentPosition, setCurrentPosition] = useState("");
+  const [targetPosition, setTargetPosition] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -20,8 +24,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      // TODO: Implement actual registration logic in Task 3
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await registerUser({ name, email, password, currentPosition, targetPosition });
       toast({
         title: "Account created!",
         description: "Welcome to NexusLab. Let's start your journey.",
@@ -30,7 +33,7 @@ export default function Register() {
     } catch (error) {
       toast({
         title: "Registration failed",
-        description: "An error occurred. Please try again.",
+        description: error instanceof Error ? error.message : "An error occurred. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -93,6 +96,30 @@ export default function Register() {
               <p className="text-xs text-muted-foreground">
                 Must be at least 8 characters
               </p>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="currentPosition">Current Position</Label>
+              <Input
+                id="currentPosition"
+                type="text"
+                placeholder="e.g., Junior Developer"
+                value={currentPosition}
+                onChange={(e) => setCurrentPosition(e.target.value)}
+                required
+                data-testid="input-currentPosition"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="targetPosition">Target Position</Label>
+              <Input
+                id="targetPosition"
+                type="text"
+                placeholder="e.g., Senior Developer"
+                value={targetPosition}
+                onChange={(e) => setTargetPosition(e.target.value)}
+                required
+                data-testid="input-targetPosition"
+              />
             </div>
             <Button type="submit" className="w-full" disabled={loading} data-testid="button-register">
               {loading ? (
