@@ -10,6 +10,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { AIChat } from "@/components/ai-chat";
 import { AuthProvider } from "@/lib/auth-context";
 import { ProtectedRoute } from "@/components/protected-route";
+import { AdminRoute } from "@/components/admin-route";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
 import Login from "@/pages/auth/login";
@@ -24,7 +25,7 @@ import SkillsPassport from "@/pages/dashboard/skills-passport";
 import Community from "@/pages/dashboard/community";
 import Wellbeing from "@/pages/dashboard/wellbeing";
 import Marketplace from "@/pages/dashboard/marketplace";
-import AdminPanel from "@/pages/admin/index";
+import AdminPanel from "@/pages/dashboard/admin/index";
 
 function Router() {
   return (
@@ -154,11 +155,11 @@ function App() {
                 </ProtectedRoute>
               </Route>
               <Route path="/admin">
-                <ProtectedRoute>
+                <AdminRoute>
                   <DashboardLayout>
                     <AdminPanel />
                   </DashboardLayout>
-                </ProtectedRoute>
+                </AdminRoute>
               </Route>
               <Route component={NotFound} />
             </Switch>

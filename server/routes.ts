@@ -647,6 +647,49 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ===== ADMIN ROUTES =====
+  app.get("/api/admin/stats", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const user = await storage.getUser(req.session.userId);
+      if (!user || user.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const [allUsers, allTrails, allLabs, allOpportunities] = await Promise.all([
+        storage.getAllUsers(),
+        storage.getAllTrails(),
+        storage.getAllLabs(),
+        storage.getAllOpportunities(),
+      ]);
+
+      const recentUsers = allUsers
+        .sort((a, b) => new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime())
+        .slice(0, 10);
+
+      res.json({
+        totalUsers: allUsers.length,
+        totalTrails: allTrails.length,
+        totalLabs: allLabs.length,
+        totalOpportunities: allOpportunities.length,
+        recentUsers: recentUsers.map(u => ({
+          id: u.id,
+          name: u.name,
+          email: u.email,
+          currentPosition: u.currentPosition,
+          targetPosition: u.targetPosition,
+          createdAt: u.createdAt,
+        })),
+      });
+    } catch (error) {
+      console.error("Admin stats error:", error);
+      res.status(500).json({ error: "Failed to fetch admin stats" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

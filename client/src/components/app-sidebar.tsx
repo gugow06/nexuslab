@@ -21,55 +21,55 @@ const menuItems = [
     title: "Dashboard",
     url: "/dashboard",
     icon: Home,
-    group: "Overview",
+    group: "Visão Geral",
   },
   {
-    title: "Career Roadmap",
+    title: "Roadmap de Carreira",
     url: "/dashboard/career",
     icon: Map,
-    group: "Learn",
+    group: "Aprender",
   },
   {
-    title: "Learning Trails",
+    title: "Trilhas de Aprendizado",
     url: "/dashboard/trails",
     icon: BookOpen,
-    group: "Learn",
+    group: "Aprender",
   },
   {
-    title: "Digital Labs",
+    title: "Labs Digitais",
     url: "/dashboard/labs",
     icon: FlaskConical,
-    group: "Learn",
+    group: "Aprender",
   },
   {
-    title: "Skills Passport",
+    title: "Passaporte de Habilidades",
     url: "/dashboard/skills",
     icon: Award,
-    group: "Progress",
+    group: "Progresso",
   },
   {
-    title: "Community 1%",
+    title: "Comunidade 1%",
     url: "/dashboard/community",
     icon: Users,
-    group: "Community",
+    group: "Comunidade",
   },
   {
     title: "Marketplace",
     url: "/dashboard/marketplace",
     icon: Briefcase,
-    group: "Opportunities",
+    group: "Oportunidades",
   },
   {
-    title: "Well-being",
+    title: "Bem-estar",
     url: "/dashboard/wellbeing",
     icon: Heart,
-    group: "Health",
+    group: "Saúde",
   },
 ];
 
 const adminItems = [
   {
-    title: "Admin Panel",
+    title: "Painel Admin",
     url: "/admin",
     icon: Shield,
   },
@@ -139,26 +139,28 @@ export function AppSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {adminItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={location === item.url}
-                    data-testid="sidebar-link-admin"
-                  >
-                    <Link href={item.url}>
-                      <item.icon className="h-4 w-4" />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {user?.role === "admin" && (
+          <SidebarGroup>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {adminItems.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={location === item.url}
+                      data-testid="sidebar-link-admin"
+                    >
+                      <Link href={item.url}>
+                        <item.icon className="h-4 w-4" />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
       </SidebarContent>
       <SidebarFooter className="p-4 border-t">
         <div className="flex items-center gap-3">
