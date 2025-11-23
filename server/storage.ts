@@ -104,6 +104,16 @@ export interface IStorage {
   getLeaderboard(limit?: number): Promise<(UserGamification & { user: User })[]>;
   getActiveChallenges(): Promise<Challenge[]>;
   completeChallenge(userId: string, challengeId: number): Promise<UserChallenge>;
+
+  // Admin - Users
+  getAllUsers(): Promise<User[]>;
+  deleteUser(id: string): Promise<void>;
+
+  // Admin - Trails
+  updateTrail(id: number, data: Partial<InsertLearningTrail>): Promise<LearningTrail | undefined>;
+  deleteTrail(id: number): Promise<void>;
+  updateTrailModule(id: number, data: Partial<InsertTrailModule>): Promise<TrailModule | undefined>;
+  deleteTrailModule(id: number): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -387,6 +397,42 @@ export class DatabaseStorage implements IStorage {
     }
 
     return userChallenge;
+  }
+
+  // ===== ADMIN - USERS =====
+  async getAllUsers(): Promise<User[]> {
+    return await db.select().from(users).orderBy(desc(users.createdAt));
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    await db.delete(users).where(eq(users.id, id));
+  }
+
+  // ===== ADMIN - TRAILS =====
+  async updateTrail(id: number, data: Partial<InsertLearningTrail>): Promise<LearningTrail | undefined> {
+    const [trail] = await db
+      .update(learningTrails)
+      .set({ ...data } as any)
+      .where(eq(learningTrails.id, id))
+      .returning();
+    return trail || undefined;
+  }
+
+  async deleteTrail(id: number): Promise<void> {
+    await db.delete(learningTrails).where(eq(learningTrails.id, id));
+  }
+
+  async updateTrailModule(id: number, data: Partial<InsertTrailModule>): Promise<TrailModule | undefined> {
+    const [module] = await db
+      .update(trailModules)
+      .set({ ...data } as any)
+      .where(eq(trailModules.id, id))
+      .returning();
+    return module || undefined;
+  }
+
+  async deleteTrailModule(id: number): Promise<void> {
+    await db.delete(trailModules).where(eq(trailModules.id, id));
   }
 }
 
