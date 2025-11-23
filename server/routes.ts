@@ -690,6 +690,320 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ===== ADMIN USERS =====
+  app.get("/api/admin/users", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const user = await storage.getUser(req.session.userId);
+      if (!user || user.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const users = await storage.getAllUsers();
+      const usersWithoutPasswords = users.map(({ password, ...u }) => u);
+      res.json(usersWithoutPasswords);
+    } catch (error) {
+      console.error("Admin users list error:", error);
+      res.status(500).json({ error: "Failed to fetch users" });
+    }
+  });
+
+  app.get("/api/admin/users/:id", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const adminUser = await storage.getUser(req.session.userId);
+      if (!adminUser || adminUser.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const user = await storage.getUser(req.params.id);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      const { password, ...userWithoutPassword } = user;
+      res.json(userWithoutPassword);
+    } catch (error) {
+      console.error("Admin get user error:", error);
+      res.status(500).json({ error: "Failed to fetch user" });
+    }
+  });
+
+  app.put("/api/admin/users/:id", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const adminUser = await storage.getUser(req.session.userId);
+      if (!adminUser || adminUser.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const { password, ...dataWithoutPassword } = req.body;
+      
+      const updateSchema = insertUserSchema.partial().omit({ password: true });
+      const data = updateSchema.parse(dataWithoutPassword);
+
+      const updatedUser = await storage.updateUser(req.params.id, data);
+      if (!updatedUser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      const { password: _, ...userWithoutPassword } = updatedUser;
+      res.json(userWithoutPassword);
+    } catch (error) {
+      console.error("Admin update user error:", error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to update user" });
+    }
+  });
+
+  app.delete("/api/admin/users/:id", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const adminUser = await storage.getUser(req.session.userId);
+      if (!adminUser || adminUser.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      if (req.params.id === req.session.userId) {
+        return res.status(400).json({ error: "Cannot delete your own account" });
+      }
+
+      const user = await storage.getUser(req.params.id);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      await storage.deleteUser(req.params.id);
+      res.json({ message: "User deleted successfully" });
+    } catch (error) {
+      console.error("Admin delete user error:", error);
+      res.status(500).json({ error: "Failed to delete user" });
+    }
+  });
+
+  // ===== ADMIN TRAILS =====
+  app.get("/api/admin/trails", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const user = await storage.getUser(req.session.userId);
+      if (!user || user.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const trails = await storage.getAllTrails();
+      res.json(trails);
+    } catch (error) {
+      console.error("Admin trails list error:", error);
+      res.status(500).json({ error: "Failed to fetch trails" });
+    }
+  });
+
+  app.get("/api/admin/trails/:id", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const user = await storage.getUser(req.session.userId);
+      if (!user || user.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const id = parseInt(req.params.id);
+      const trail = await storage.getTrail(id);
+      
+      if (!trail) {
+        return res.status(404).json({ error: "Trail not found" });
+      }
+
+      const modules = await storage.getTrailModules(id);
+      res.json({ ...trail, modules });
+    } catch (error) {
+      console.error("Admin get trail error:", error);
+      res.status(500).json({ error: "Failed to fetch trail" });
+    }
+  });
+
+  app.post("/api/admin/trails", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const user = await storage.getUser(req.session.userId);
+      if (!user || user.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const data = insertLearningTrailSchema.parse(req.body);
+      const trail = await storage.createTrail(data);
+      res.json(trail);
+    } catch (error) {
+      console.error("Admin create trail error:", error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to create trail" });
+    }
+  });
+
+  app.put("/api/admin/trails/:id", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const user = await storage.getUser(req.session.userId);
+      if (!user || user.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const id = parseInt(req.params.id);
+      const data = insertLearningTrailSchema.partial().parse(req.body);
+      
+      const trail = await storage.updateTrail(id, data);
+      if (!trail) {
+        return res.status(404).json({ error: "Trail not found" });
+      }
+
+      res.json(trail);
+    } catch (error) {
+      console.error("Admin update trail error:", error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to update trail" });
+    }
+  });
+
+  app.delete("/api/admin/trails/:id", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const user = await storage.getUser(req.session.userId);
+      if (!user || user.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const id = parseInt(req.params.id);
+      const trail = await storage.getTrail(id);
+      
+      if (!trail) {
+        return res.status(404).json({ error: "Trail not found" });
+      }
+
+      await storage.deleteTrail(id);
+      res.json({ message: "Trail deleted successfully" });
+    } catch (error) {
+      console.error("Admin delete trail error:", error);
+      res.status(500).json({ error: "Failed to delete trail" });
+    }
+  });
+
+  // ===== ADMIN TRAIL MODULES =====
+  app.post("/api/admin/trails/:trailId/modules", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const user = await storage.getUser(req.session.userId);
+      if (!user || user.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const trailId = parseInt(req.params.trailId);
+      const trail = await storage.getTrail(trailId);
+      
+      if (!trail) {
+        return res.status(404).json({ error: "Trail not found" });
+      }
+
+      const data = insertTrailModuleSchema.parse({
+        ...req.body,
+        trailId,
+      });
+
+      const module = await storage.createTrailModule(data);
+      res.json(module);
+    } catch (error) {
+      console.error("Admin create module error:", error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to create module" });
+    }
+  });
+
+  app.put("/api/admin/trails/:trailId/modules/:moduleId", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const user = await storage.getUser(req.session.userId);
+      if (!user || user.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const moduleId = parseInt(req.params.moduleId);
+      const data = insertTrailModuleSchema.partial().parse(req.body);
+      
+      const module = await storage.updateTrailModule(moduleId, data);
+      if (!module) {
+        return res.status(404).json({ error: "Module not found" });
+      }
+
+      res.json(module);
+    } catch (error) {
+      console.error("Admin update module error:", error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to update module" });
+    }
+  });
+
+  app.delete("/api/admin/trails/:trailId/modules/:moduleId", async (req, res) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const user = await storage.getUser(req.session.userId);
+      if (!user || user.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      const moduleId = parseInt(req.params.moduleId);
+      
+      await storage.deleteTrailModule(moduleId);
+      res.json({ message: "Module deleted successfully" });
+    } catch (error) {
+      console.error("Admin delete module error:", error);
+      res.status(500).json({ error: "Failed to delete module" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
