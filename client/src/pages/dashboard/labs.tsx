@@ -9,67 +9,67 @@ import { Link } from "wouter";
 const labs = [
   {
     id: 1,
-    name: "Crisis Management Simulation",
-    description: "Navigate a product launch crisis and make critical decisions under pressure",
-    difficulty: "advanced",
-    category: "Leadership",
+    name: "Simulação de Gerenciamento de Crise",
+    description: "Navegue por uma crise de lançamento de produto e tome decisões críticas sob pressão",
+    difficulty: "avançado",
+    category: "Liderança",
     completions: 1240,
   },
   {
     id: 2,
-    name: "Stakeholder Negotiation",
-    description: "Balance competing priorities and negotiate win-win solutions",
-    difficulty: "intermediate",
-    category: "Communication",
+    name: "Negociação com Stakeholders",
+    description: "Equilibre prioridades concorrentes e negocie soluções ganha-ganha",
+    difficulty: "intermediário",
+    category: "Comunicação",
     completions: 2150,
   },
   {
     id: 3,
-    name: "Budget Allocation Challenge",
-    description: "Optimize resource allocation across multiple projects with constraints",
-    difficulty: "intermediate",
-    category: "Finance",
+    name: "Desafio de Alocação de Orçamento",
+    description: "Otimize a alocação de recursos em múltiplos projetos com restrições",
+    difficulty: "intermediário",
+    category: "Finanças",
     completions: 1890,
   },
   {
     id: 4,
-    name: "Team Conflict Resolution",
-    description: "Address team dynamics and resolve interpersonal conflicts effectively",
-    difficulty: "beginner",
-    category: "Leadership",
+    name: "Resolução de Conflitos em Equipe",
+    description: "Aborde a dinâmica de equipe e resolva conflitos interpessoais de forma eficaz",
+    difficulty: "iniciante",
+    category: "Liderança",
     completions: 3420,
   },
   {
     id: 5,
-    name: "Market Entry Strategy",
-    description: "Develop and execute a go-to-market strategy for a new product",
-    difficulty: "advanced",
-    category: "Strategy",
+    name: "Estratégia de Entrada no Mercado",
+    description: "Desenvolva e execute uma estratégia de entrada no mercado para um novo produto",
+    difficulty: "avançado",
+    category: "Estratégia",
     completions: 980,
   },
   {
     id: 6,
-    name: "Data-Driven Decision Making",
-    description: "Analyze datasets and make strategic recommendations based on insights",
-    difficulty: "intermediate",
-    category: "Analytics",
+    name: "Tomada de Decisão Baseada em Dados",
+    description: "Analise conjuntos de dados e faça recomendações estratégicas baseadas em insights",
+    difficulty: "intermediário",
+    category: "Análise",
     completions: 1650,
   },
 ];
 
 const difficultyColors: Record<string, string> = {
-  beginner: "bg-green-500/10 text-green-700 dark:text-green-400",
-  intermediate: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
-  advanced: "bg-red-500/10 text-red-700 dark:text-red-400",
+  iniciante: "bg-green-500/10 text-green-700 dark:text-green-400",
+  intermediário: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
+  avançado: "bg-red-500/10 text-red-700 dark:text-red-400",
 };
 
 export default function DigitalLabs() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-4xl font-bold mb-2">Digital Labs</h1>
+        <h1 className="text-4xl font-bold mb-2">Laboratórios Digitais</h1>
         <p className="text-muted-foreground text-lg">
-          Practice real-world scenarios in risk-free simulations
+          Pratique cenários do mundo real em simulações sem riscos
         </p>
       </div>
 
@@ -77,7 +77,7 @@ export default function DigitalLabs() {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search labs..."
+            placeholder="Buscar laboratórios..."
             className="pl-10"
             data-testid="input-search-labs"
           />
@@ -113,11 +113,11 @@ export default function DigitalLabs() {
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <TrendingUp className="h-4 w-4" />
-                  <span>{lab.completions.toLocaleString()} completions</span>
+                  <span>{lab.completions.toLocaleString()} conclusões</span>
                 </div>
                 <Link href={`/dashboard/labs/${lab.id}`}>
                   <Button className="w-full" data-testid={`button-start-lab-${index}`}>
-                    Start Simulation
+                    Iniciar Simulação
                   </Button>
                 </Link>
               </CardContent>

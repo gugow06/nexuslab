@@ -8,42 +8,42 @@ import { Link } from "wouter";
 const modules = [
   {
     id: 1,
-    title: "Introduction to Leadership Fundamentals",
-    type: "video",
+    title: "Introdução aos Fundamentos de Liderança",
+    type: "vídeo",
     duration: "45 min",
     completed: true,
   },
   {
     id: 2,
-    title: "Building High-Performance Teams",
-    type: "text",
+    title: "Construindo Equipes de Alta Performance",
+    type: "texto",
     duration: "30 min",
     completed: true,
   },
   {
     id: 3,
-    title: "Leadership Challenge: Team Dynamics",
-    type: "challenge",
+    title: "Desafio de Liderança: Dinâmica de Equipe",
+    type: "desafio",
     duration: "60 min",
     completed: false,
   },
   {
     id: 4,
-    title: "Effective Communication Strategies",
-    type: "video",
+    title: "Estratégias de Comunicação Eficaz",
+    type: "vídeo",
     duration: "40 min",
     completed: false,
   },
   {
     id: 5,
-    title: "Decision-Making Under Pressure",
+    title: "Tomada de Decisão Sob Pressão",
     type: "quiz",
     duration: "25 min",
     completed: false,
   },
   {
     id: 6,
-    title: "Advanced Leadership Quiz",
+    title: "Quiz Avançado de Liderança",
     type: "quiz",
     duration: "30 min",
     completed: false,
@@ -52,9 +52,9 @@ const modules = [
 ];
 
 const typeColors: Record<string, string> = {
-  video: "bg-blue-500/10 text-blue-700 dark:text-blue-400",
-  text: "bg-green-500/10 text-green-700 dark:text-green-400",
-  challenge: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
+  vídeo: "bg-blue-500/10 text-blue-700 dark:text-blue-400",
+  texto: "bg-green-500/10 text-green-700 dark:text-green-400",
+  desafio: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
   quiz: "bg-orange-500/10 text-orange-700 dark:text-orange-400",
 };
 
@@ -69,25 +69,25 @@ export default function TrailDetail() {
         <Link href="/dashboard/trails">
           <Button variant="ghost" className="mb-4" data-testid="button-back">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Trails
+            Voltar para Trilhas
           </Button>
         </Link>
         <div className="flex items-start justify-between gap-6">
           <div>
-            <h1 className="text-4xl font-bold mb-2">Advanced Leadership Skills</h1>
+            <h1 className="text-4xl font-bold mb-2">Habilidades Avançadas de Liderança</h1>
             <p className="text-muted-foreground text-lg mb-4">
-              Master the art of leading high-performing teams and driving organizational change
+              Domine a arte de liderar equipes de alta performance e impulsionar mudanças organizacionais
             </p>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-1">
                 <Clock className="h-4 w-4" />
-                <span>12 hours</span>
+                <span>12 horas</span>
               </div>
               <div className="flex items-center gap-1">
                 <Award className="h-4 w-4" />
-                <span>{totalModules} modules</span>
+                <span>{totalModules} módulos</span>
               </div>
-              <Badge variant="secondary">Intermediate</Badge>
+              <Badge variant="secondary">Intermediário</Badge>
             </div>
           </div>
         </div>
@@ -95,19 +95,19 @@ export default function TrailDetail() {
 
       <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
         <CardHeader>
-          <CardTitle>Your Progress</CardTitle>
+          <CardTitle>Seu Progresso</CardTitle>
           <CardDescription>
-            {completedModules} of {totalModules} modules completed
+            {completedModules} de {totalModules} módulos concluídos
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Progress value={progress} className="mb-2" />
-          <p className="text-sm text-muted-foreground">{Math.round(progress)}% complete</p>
+          <p className="text-sm text-muted-foreground">{Math.round(progress)}% concluído</p>
         </CardContent>
       </Card>
 
       <div>
-        <h2 className="text-2xl font-semibold mb-6">Modules</h2>
+        <h2 className="text-2xl font-semibold mb-6">Módulos</h2>
         <div className="space-y-4">
           {modules.map((module, index) => (
             <Card
@@ -153,7 +153,7 @@ export default function TrailDetail() {
                           variant={module.completed ? "outline" : "default"}
                           data-testid={`button-module-${index}`}
                         >
-                          {module.completed ? "Review" : "Start"}
+                          {module.completed ? "Revisar" : "Iniciar"}
                         </Button>
                       )}
                     </div>

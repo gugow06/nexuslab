@@ -10,60 +10,60 @@ import { Link } from "wouter";
 const trails = [
   {
     id: 1,
-    title: "Advanced Leadership Skills",
-    description: "Master the art of leading high-performing teams and driving organizational change",
-    difficulty: "intermediate",
-    category: "Leadership",
+    title: "Habilidades Avançadas de Liderança",
+    description: "Domine a arte de liderar equipes de alta performance e impulsionar mudanças organizacionais",
+    difficulty: "intermediário",
+    category: "Liderança",
     estimatedHours: 12,
     modules: 8,
     thumbnail: "leadership",
   },
   {
     id: 2,
-    title: "Data-Driven Decision Making",
-    description: "Learn to leverage data analytics and insights for strategic business decisions",
-    difficulty: "advanced",
-    category: "Data",
+    title: "Tomada de Decisão Baseada em Dados",
+    description: "Aprenda a aproveitar análise de dados e insights para decisões estratégicas de negócios",
+    difficulty: "avançado",
+    category: "Dados",
     estimatedHours: 16,
     modules: 10,
     thumbnail: "data",
   },
   {
     id: 3,
-    title: "Strategic Communication",
-    description: "Develop communication skills for executive presentations and stakeholder management",
-    difficulty: "beginner",
-    category: "Communication",
+    title: "Comunicação Estratégica",
+    description: "Desenvolva habilidades de comunicação para apresentações executivas e gestão de stakeholders",
+    difficulty: "iniciante",
+    category: "Comunicação",
     estimatedHours: 8,
     modules: 6,
     thumbnail: "communication",
   },
   {
     id: 4,
-    title: "Product Innovation",
-    description: "Create breakthrough products through design thinking and customer insights",
-    difficulty: "intermediate",
-    category: "Product",
+    title: "Inovação de Produtos",
+    description: "Crie produtos inovadores através de design thinking e insights de clientes",
+    difficulty: "intermediário",
+    category: "Produto",
     estimatedHours: 14,
     modules: 9,
     thumbnail: "innovation",
   },
   {
     id: 5,
-    title: "Financial Strategy",
-    description: "Understand financial metrics and create value-driven business strategies",
-    difficulty: "advanced",
-    category: "Finance",
+    title: "Estratégia Financeira",
+    description: "Compreenda métricas financeiras e crie estratégias de negócios orientadas por valor",
+    difficulty: "avançado",
+    category: "Finanças",
     estimatedHours: 18,
     modules: 12,
     thumbnail: "finance",
   },
   {
     id: 6,
-    title: "Agile Methodologies",
-    description: "Master agile frameworks for faster delivery and continuous improvement",
-    difficulty: "beginner",
-    category: "Methodology",
+    title: "Metodologias Ágeis",
+    description: "Domine frameworks ágeis para entrega mais rápida e melhoria contínua",
+    difficulty: "iniciante",
+    category: "Metodologia",
     estimatedHours: 10,
     modules: 7,
     thumbnail: "agile",
@@ -71,18 +71,18 @@ const trails = [
 ];
 
 const difficultyColors: Record<string, string> = {
-  beginner: "bg-green-500/10 text-green-700 dark:text-green-400",
-  intermediate: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
-  advanced: "bg-red-500/10 text-red-700 dark:text-red-400",
+  iniciante: "bg-green-500/10 text-green-700 dark:text-green-400",
+  intermediário: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
+  avançado: "bg-red-500/10 text-red-700 dark:text-red-400",
 };
 
 export default function LearningTrails() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-4xl font-bold mb-2">Learning Trails</h1>
+        <h1 className="text-4xl font-bold mb-2">Trilhas de Aprendizado</h1>
         <p className="text-muted-foreground text-lg">
-          Structured learning paths to master in-demand skills
+          Caminhos de aprendizado estruturados para dominar habilidades em alta demanda
         </p>
       </div>
 
@@ -90,7 +90,7 @@ export default function LearningTrails() {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search trails..."
+            placeholder="Buscar trilhas..."
             className="pl-10"
             data-testid="input-search-trails"
           />
@@ -99,9 +99,9 @@ export default function LearningTrails() {
 
       <Tabs defaultValue="all" className="space-y-6">
         <TabsList>
-          <TabsTrigger value="all" data-testid="tab-all">All Trails</TabsTrigger>
-          <TabsTrigger value="in-progress" data-testid="tab-in-progress">In Progress</TabsTrigger>
-          <TabsTrigger value="completed" data-testid="tab-completed">Completed</TabsTrigger>
+          <TabsTrigger value="all" data-testid="tab-all">Todas as Trilhas</TabsTrigger>
+          <TabsTrigger value="in-progress" data-testid="tab-in-progress">Em Andamento</TabsTrigger>
+          <TabsTrigger value="completed" data-testid="tab-completed">Concluídas</TabsTrigger>
         </TabsList>
 
         <TabsContent value="all" className="space-y-6">
@@ -139,12 +139,12 @@ export default function LearningTrails() {
                       </div>
                       <div className="flex items-center gap-1">
                         <Award className="h-4 w-4" />
-                        <span>{trail.modules} modules</span>
+                        <span>{trail.modules} módulos</span>
                       </div>
                     </div>
                     <Link href={`/dashboard/trails/${trail.id}`}>
                       <Button className="w-full" variant="outline" data-testid={`button-start-trail-${index}`}>
-                        Start Trail
+                        Iniciar Trilha
                       </Button>
                     </Link>
                   </CardContent>
@@ -156,18 +156,18 @@ export default function LearningTrails() {
 
         <TabsContent value="in-progress">
           <div className="text-center py-12">
-            <p className="text-muted-foreground">No trails in progress yet</p>
+            <p className="text-muted-foreground">Nenhuma trilha em andamento ainda</p>
             <Button className="mt-4" variant="outline">
-              Browse All Trails
+              Explorar Todas as Trilhas
             </Button>
           </div>
         </TabsContent>
 
         <TabsContent value="completed">
           <div className="text-center py-12">
-            <p className="text-muted-foreground">No completed trails yet</p>
+            <p className="text-muted-foreground">Nenhuma trilha concluída ainda</p>
             <Button className="mt-4" variant="outline">
-              Start Learning
+              Começar a Aprender
             </Button>
           </div>
         </TabsContent>

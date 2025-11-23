@@ -8,18 +8,18 @@ import { Search, Download, Award } from "lucide-react";
 import { motion } from "framer-motion";
 
 const skills = [
-  { name: "Strategic Planning", category: "Leadership", level: 85, dateAcquired: "2024-01-15" },
-  { name: "Data Analysis", category: "Analytics", level: 72, dateAcquired: "2024-02-20" },
-  { name: "Stakeholder Management", category: "Communication", level: 90, dateAcquired: "2023-11-10" },
-  { name: "Product Strategy", category: "Product", level: 78, dateAcquired: "2024-03-05" },
-  { name: "Team Leadership", category: "Leadership", level: 88, dateAcquired: "2023-12-18" },
-  { name: "Financial Analysis", category: "Finance", level: 65, dateAcquired: "2024-04-12" },
-  { name: "Agile Methodologies", category: "Methodology", level: 92, dateAcquired: "2023-10-22" },
-  { name: "User Research", category: "Product", level: 70, dateAcquired: "2024-01-28" },
-  { name: "Business Strategy", category: "Strategy", level: 75, dateAcquired: "2024-02-14" },
-  { name: "Public Speaking", category: "Communication", level: 82, dateAcquired: "2023-12-05" },
-  { name: "Market Analysis", category: "Strategy", level: 68, dateAcquired: "2024-03-20" },
-  { name: "Conflict Resolution", category: "Leadership", level: 86, dateAcquired: "2024-01-08" },
+  { name: "Planejamento Estratégico", category: "Liderança", level: 85, dateAcquired: "2024-01-15" },
+  { name: "Análise de Dados", category: "Análise", level: 72, dateAcquired: "2024-02-20" },
+  { name: "Gestão de Stakeholders", category: "Comunicação", level: 90, dateAcquired: "2023-11-10" },
+  { name: "Estratégia de Produto", category: "Produto", level: 78, dateAcquired: "2024-03-05" },
+  { name: "Liderança de Equipe", category: "Liderança", level: 88, dateAcquired: "2023-12-18" },
+  { name: "Análise Financeira", category: "Finanças", level: 65, dateAcquired: "2024-04-12" },
+  { name: "Metodologias Ágeis", category: "Metodologia", level: 92, dateAcquired: "2023-10-22" },
+  { name: "Pesquisa com Usuários", category: "Produto", level: 70, dateAcquired: "2024-01-28" },
+  { name: "Estratégia de Negócios", category: "Estratégia", level: 75, dateAcquired: "2024-02-14" },
+  { name: "Oratória", category: "Comunicação", level: 82, dateAcquired: "2023-12-05" },
+  { name: "Análise de Mercado", category: "Estratégia", level: 68, dateAcquired: "2024-03-20" },
+  { name: "Resolução de Conflitos", category: "Liderança", level: 86, dateAcquired: "2024-01-08" },
 ];
 
 const categories = Array.from(new Set(skills.map((s) => s.category)));
@@ -45,21 +45,21 @@ export default function SkillsPassport() {
     <div className="space-y-8">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-4xl font-bold mb-2">Skills Passport</h1>
+          <h1 className="text-4xl font-bold mb-2">Passaporte de Habilidades</h1>
           <p className="text-muted-foreground text-lg">
-            Your comprehensive competency portfolio
+            Seu portfólio abrangente de competências
           </p>
         </div>
         <Button data-testid="button-export-pdf">
           <Download className="mr-2 h-4 w-4" />
-          Export PDF
+          Exportar PDF
         </Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Skills</CardTitle>
+            <CardTitle className="text-sm font-medium">Total de Habilidades</CardTitle>
             <Award className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
@@ -68,7 +68,7 @@ export default function SkillsPassport() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg. Proficiency</CardTitle>
+            <CardTitle className="text-sm font-medium">Proficiência Média</CardTitle>
             <Award className="h-4 w-4 text-chart-1" />
           </CardHeader>
           <CardContent>
@@ -77,7 +77,7 @@ export default function SkillsPassport() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Categories</CardTitle>
+            <CardTitle className="text-sm font-medium">Categorias</CardTitle>
             <Award className="h-4 w-4 text-chart-2" />
           </CardHeader>
           <CardContent>
@@ -90,7 +90,7 @@ export default function SkillsPassport() {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search skills..."
+            placeholder="Buscar habilidades..."
             className="pl-10"
             data-testid="input-search-skills"
           />
@@ -99,7 +99,7 @@ export default function SkillsPassport() {
 
       <Tabs defaultValue="all" className="space-y-6">
         <TabsList className="flex-wrap h-auto">
-          <TabsTrigger value="all" data-testid="tab-all">All Skills</TabsTrigger>
+          <TabsTrigger value="all" data-testid="tab-all">Todas as Habilidades</TabsTrigger>
           {categories.map((category) => (
             <TabsTrigger key={category} value={category} data-testid={`tab-${category.toLowerCase()}`}>
               {category}
@@ -129,14 +129,14 @@ export default function SkillsPassport() {
                   <CardContent>
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Proficiency</span>
+                        <span className="text-muted-foreground">Proficiência</span>
                         <span className={`font-semibold ${getSkillColor(skill.level)}`}>
                           {skill.level}%
                         </span>
                       </div>
                       <Progress value={skill.level} className={getProgressColor(skill.level)} />
                       <p className="text-xs text-muted-foreground">
-                        Acquired {new Date(skill.dateAcquired).toLocaleDateString()}
+                        Adquirida em {new Date(skill.dateAcquired).toLocaleDateString('pt-BR')}
                       </p>
                     </div>
                   </CardContent>
@@ -162,14 +162,14 @@ export default function SkillsPassport() {
                     <CardContent>
                       <div className="space-y-2">
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-muted-foreground">Proficiency</span>
+                          <span className="text-muted-foreground">Proficiência</span>
                           <span className={`font-semibold ${getSkillColor(skill.level)}`}>
                             {skill.level}%
                           </span>
                         </div>
                         <Progress value={skill.level} className={getProgressColor(skill.level)} />
                         <p className="text-xs text-muted-foreground">
-                          Acquired {new Date(skill.dateAcquired).toLocaleDateString()}
+                          Adquirida em {new Date(skill.dateAcquired).toLocaleDateString('pt-BR')}
                         </p>
                       </div>
                     </CardContent>

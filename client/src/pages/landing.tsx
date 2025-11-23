@@ -8,32 +8,32 @@ const features = [
   {
     icon: Brain,
     title: "Nexus.AI Mentor",
-    description: "Get personalized career guidance from our AI-powered mentor, tailored to your goals and experience.",
+    description: "Obtenha orientação de carreira personalizada de nosso mentor com IA, adaptada aos seus objetivos e experiência.",
   },
   {
     icon: TrendingUp,
-    title: "Career Roadmaps",
-    description: "Visualize your path from current position to dream role with clear, actionable steps.",
+    title: "Roadmaps de Carreira",
+    description: "Visualize seu caminho da posição atual até a função dos sonhos com passos claros e acionáveis.",
   },
   {
     icon: Award,
-    title: "Skills Passport",
-    description: "Track and showcase your competencies with a comprehensive, verifiable skills portfolio.",
+    title: "Passaporte de Habilidades",
+    description: "Acompanhe e mostre suas competências com um portfólio de habilidades abrangente e verificável.",
   },
   {
     icon: Users,
-    title: "Community 1%",
-    description: "Join an elite community of high achievers with gamification, challenges, and leaderboards.",
+    title: "Comunidade 1%",
+    description: "Junte-se a uma comunidade de elite de grandes realizadores com gamificação, desafios e rankings.",
   },
   {
     icon: Briefcase,
-    title: "Opportunity Marketplace",
-    description: "Access curated job opportunities matched to your skills and career aspirations.",
+    title: "Mercado de Oportunidades",
+    description: "Acesse oportunidades de trabalho selecionadas que correspondem às suas habilidades e aspirações de carreira.",
   },
   {
     icon: Heart,
-    title: "Well-being Tracking",
-    description: "Maintain work-life balance with mood tracking and AI-powered wellness suggestions.",
+    title: "Acompanhamento de Bem-estar",
+    description: "Mantenha o equilíbrio entre vida pessoal e profissional com rastreamento de humor e sugestões de bem-estar geradas por IA.",
   },
 ];
 
@@ -51,12 +51,12 @@ export default function Landing() {
           <div className="flex items-center gap-4">
             <Link href="/login">
               <Button variant="ghost" data-testid="link-login">
-                Sign In
+                Entrar
               </Button>
             </Link>
             <Link href="/register">
               <Button data-testid="link-register">
-                Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                Começar <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -72,19 +72,19 @@ export default function Landing() {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-              Transform Your Career with AI-Powered Guidance
+              Transforme Sua Carreira com Orientação de IA
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-              Join the top 1% of professionals with personalized learning paths, digital simulations, and a comprehensive skills ecosystem.
+              Junte-se aos 1% melhores profissionais com caminhos de aprendizado personalizados, simulações digitais e um ecossistema abrangente de habilidades.
             </p>
             <div className="flex gap-4 justify-center">
               <Link href="/register">
                 <Button size="lg" data-testid="button-hero-start">
-                  Start Your Journey <ArrowRight className="ml-2 h-5 w-5" />
+                  Comece Sua Jornada <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Button size="lg" variant="outline" data-testid="button-hero-learn">
-                Learn More
+                Saiba Mais
               </Button>
             </div>
           </motion.div>
@@ -94,9 +94,9 @@ export default function Landing() {
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Everything You Need to Excel</h2>
+            <h2 className="text-3xl font-bold mb-4">Tudo Que Você Precisa Para Se Destacar</h2>
             <p className="text-lg text-muted-foreground">
-              A comprehensive platform designed for career transformation
+              Uma plataforma abrangente projetada para transformação de carreira
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -124,13 +124,13 @@ export default function Landing() {
 
       <section className="py-20 px-6 bg-muted/50">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Join the Top 1%?</h2>
+          <h2 className="text-3xl font-bold mb-6">Pronto Para Se Juntar aos 1% Melhores?</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Start your transformation today with AI-powered career development
+            Comece sua transformação hoje com desenvolvimento de carreira com IA
           </p>
           <Link href="/register">
             <Button size="lg" data-testid="button-cta-signup">
-              Create Free Account <ArrowRight className="ml-2 h-5 w-5" />
+              Criar Conta Gratuita <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
         </div>
@@ -139,40 +139,40 @@ export default function Landing() {
       <footer className="border-t py-12 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-semibold mb-3">Product</h3>
+            <h3 className="font-semibold mb-3">Produto</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Features</li>
-              <li>Pricing</li>
-              <li>FAQ</li>
+              <li>Funcionalidades</li>
+              <li>Preços</li>
+              <li>Perguntas Frequentes</li>
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold mb-3">Company</h3>
+            <h3 className="font-semibold mb-3">Empresa</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>About</li>
+              <li>Sobre</li>
               <li>Blog</li>
-              <li>Careers</li>
+              <li>Carreiras</li>
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold mb-3">Resources</h3>
+            <h3 className="font-semibold mb-3">Recursos</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Documentation</li>
-              <li>Community</li>
-              <li>Support</li>
+              <li>Documentação</li>
+              <li>Comunidade</li>
+              <li>Suporte</li>
             </ul>
           </div>
           <div>
             <h3 className="font-semibold mb-3">Legal</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Privacy</li>
-              <li>Terms</li>
-              <li>Security</li>
+              <li>Privacidade</li>
+              <li>Termos</li>
+              <li>Segurança</li>
             </ul>
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-          © 2025 NexusLab. All rights reserved.
+          © 2025 NexusLab. Todos os direitos reservados.
         </div>
       </footer>
     </div>
