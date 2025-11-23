@@ -327,19 +327,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/trails/:id/progress", async (req, res) => {
     try {
+      if (!req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
       const trailId = parseInt(req.params.id);
       const data = insertUserTrailProgressSchema.parse({
         ...req.body,
+        userId: req.session.userId,
         trailId,
       });
 
       const progress = await storage.updateTrailProgress(data);
       
       // Award XP for progress
-      if (data.userId) {
-        const xpReward = 50; // Base XP for module completion
-        await storage.updateUserXP(data.userId, xpReward);
-      }
+      const xpReward = 50; // Base XP for module completion
+      await storage.updateUserXP(req.session.userId, xpReward);
 
       res.json(progress);
     } catch (error) {
