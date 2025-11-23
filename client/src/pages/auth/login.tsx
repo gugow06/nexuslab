@@ -23,14 +23,14 @@ export default function Login() {
     try {
       await login(email, password);
       toast({
-        title: "Welcome back!",
-        description: "You have successfully logged in.",
+        title: "Bem-vindo de volta!",
+        description: "Você entrou com sucesso.",
       });
       setLocation("/dashboard");
     } catch (error) {
       toast({
-        title: "Login failed",
-        description: error instanceof Error ? error.message : "Invalid email or password.",
+        title: "Falha no login",
+        description: error instanceof Error ? error.message : "E-mail ou senha inválidos.",
         variant: "destructive",
       });
     } finally {
@@ -48,19 +48,19 @@ export default function Login() {
             </div>
             <span className="text-xl font-bold">NexusLab</span>
           </div>
-          <CardTitle className="text-2xl">Welcome back</CardTitle>
+          <CardTitle className="text-2xl">Bem-vindo de volta</CardTitle>
           <CardDescription>
-            Enter your credentials to access your account
+            Entre com suas credenciais para acessar sua conta
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">E-mail</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="voce@exemplo.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -68,7 +68,7 @@ export default function Login() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Senha</Label>
               <Input
                 id="password"
                 type="password"
@@ -82,18 +82,18 @@ export default function Login() {
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
+                  Entrando...
                 </>
               ) : (
-                "Sign In"
+                "Entrar"
               )}
             </Button>
           </form>
           <div className="mt-6 text-center text-sm">
-            <span className="text-muted-foreground">Don't have an account? </span>
+            <span className="text-muted-foreground">Não tem uma conta? </span>
             <Link href="/register">
               <a className="text-primary hover:underline" data-testid="link-register">
-                Sign up
+                Cadastre-se
               </a>
             </Link>
           </div>

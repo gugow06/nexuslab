@@ -17,10 +17,10 @@ export default function DashboardHome() {
   });
 
   const stats = [
-    { label: "Skills Acquired", value: data?.stats?.skillsAcquired || 0, icon: Award, color: "text-chart-1" },
-    { label: "XP Earned", value: data?.stats?.xpEarned || 0, icon: TrendingUp, color: "text-chart-2" },
-    { label: "Labs Completed", value: data?.stats?.labsCompleted || 0, icon: FlaskConical, color: "text-chart-3" },
-    { label: "Opportunities", value: data?.stats?.opportunities || 0, icon: Briefcase, color: "text-chart-4" },
+    { label: "Habilidades Adquiridas", value: data?.stats?.skillsAcquired || 0, icon: Award, color: "text-chart-1" },
+    { label: "XP Ganho", value: data?.stats?.xpEarned || 0, icon: TrendingUp, color: "text-chart-2" },
+    { label: "Labs Completados", value: data?.stats?.labsCompleted || 0, icon: FlaskConical, color: "text-chart-3" },
+    { label: "Oportunidades", value: data?.stats?.opportunities || 0, icon: Briefcase, color: "text-chart-4" },
   ];
 
   const activeTrails = data?.activeTrails || [];
@@ -41,16 +41,16 @@ export default function DashboardHome() {
     <div className="space-y-8">
       <div>
         <div className="flex items-center gap-3 mb-2">
-          <h1 className="text-4xl font-bold">Welcome back, {user?.name?.split(' ')[0] || 'there'}</h1>
+          <h1 className="text-4xl font-bold">Bem-vindo de volta, {user?.name?.split(' ')[0] || 'você'}</h1>
           {streak > 0 && (
             <Badge variant="secondary" className="flex items-center gap-1" data-testid="badge-streak">
               <Flame className="h-3 w-3 text-orange-500" />
-              <span>{streak} day streak</span>
+              <span>{streak} {streak === 1 ? 'dia' : 'dias'} de sequência</span>
             </Badge>
           )}
         </div>
         <p className="text-muted-foreground text-lg">
-          Continue your journey to excellence
+          Continue sua jornada rumo à excelência
         </p>
       </div>
 
@@ -59,22 +59,22 @@ export default function DashboardHome() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Flame className="h-5 w-5 text-orange-500" />
-              Daily Challenge
+              Desafio Diário
             </CardTitle>
-            <CardDescription>Complete today's challenge to earn bonus XP</CardDescription>
+            <CardDescription>Complete o desafio de hoje para ganhar XP bônus</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="mb-4">{dailyChallenge.description}</p>
             <Progress value={dailyChallenge.progress} className="mb-2" />
             <p className="text-sm text-muted-foreground">
-              {dailyChallenge.progress}% complete • {dailyChallenge.xpReward} XP reward
+              {dailyChallenge.progress}% completo • {dailyChallenge.xpReward} XP de recompensa
             </p>
           </CardContent>
         </Card>
       )}
 
       <div>
-        <h2 className="text-2xl font-semibold mb-6">Your Progress</h2>
+        <h2 className="text-2xl font-semibold mb-6">Seu Progresso</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <motion.div
@@ -101,10 +101,10 @@ export default function DashboardHome() {
 
       <div>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-semibold">Active Trails</h2>
+          <h2 className="text-2xl font-semibold">Trilhas Ativas</h2>
           <Link href="/dashboard/trails">
             <Button variant="ghost" data-testid="link-view-all-trails">
-              View All <ArrowRight className="ml-2 h-4 w-4" />
+              Ver Todas <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </div>
@@ -131,12 +131,12 @@ export default function DashboardHome() {
                     <div className="space-y-2">
                       <Progress value={trail.progress || 0} />
                       <p className="text-sm text-muted-foreground">
-                        {trail.progress || 0}% complete
+                        {trail.progress || 0}% completo
                       </p>
                     </div>
                     <Link href={`/dashboard/trails/${trail.id}`}>
                       <Button className="w-full mt-4" variant="outline" data-testid={`button-continue-${index}`}>
-                        Continue Learning
+                        Continuar Aprendendo
                       </Button>
                     </Link>
                   </CardContent>
@@ -146,9 +146,9 @@ export default function DashboardHome() {
           ) : (
             <Card className="col-span-full">
               <CardContent className="flex flex-col items-center justify-center py-12">
-                <p className="text-muted-foreground mb-4">No active trails yet</p>
+                <p className="text-muted-foreground mb-4">Nenhuma trilha ativa ainda</p>
                 <Link href="/dashboard/trails">
-                  <Button variant="outline">Browse Learning Trails</Button>
+                  <Button variant="outline">Explorar Trilhas de Aprendizado</Button>
                 </Link>
               </CardContent>
             </Card>
@@ -158,17 +158,17 @@ export default function DashboardHome() {
 
       {recentWellbeing.length > 0 && (
         <div>
-          <h2 className="text-2xl font-semibold mb-6">Recent Well-being Check-ins</h2>
+          <h2 className="text-2xl font-semibold mb-6">Check-ins de Bem-estar Recentes</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {recentWellbeing.map((log: any, index: number) => (
               <Card key={index} data-testid={`card-wellbeing-${index}`}>
                 <CardHeader>
                   <CardTitle className="text-sm font-medium">
-                    {new Date(log.createdAt).toLocaleDateString()}
+                    {new Date(log.createdAt).toLocaleDateString('pt-BR')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-2xl font-bold mb-2">Mood: {log.mood}/5</p>
+                  <p className="text-2xl font-bold mb-2">Humor: {log.mood}/5</p>
                   {log.note && (
                     <p className="text-sm text-muted-foreground line-clamp-2">{log.note}</p>
                   )}
@@ -180,7 +180,7 @@ export default function DashboardHome() {
       )}
 
       <div>
-        <h2 className="text-2xl font-semibold mb-6">Personalized Recommendations</h2>
+        <h2 className="text-2xl font-semibold mb-6">Recomendações Personalizadas</h2>
         {recommendations.length > 0 ? (
           <div className="space-y-4">
             {recommendations.map((rec: any, index: number) => (
@@ -190,11 +190,11 @@ export default function DashboardHome() {
                   <CardDescription>{rec.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Link href={rec.action}>
-                    <Button variant="outline" data-testid={`button-recommendation-${index}`}>
-                      Take Action <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
+                  <Button variant="outline" asChild data-testid={`button-recommendation-${index}`}>
+                    <Link href={rec.action}>
+                      Agir Agora <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -203,10 +203,10 @@ export default function DashboardHome() {
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <p className="text-muted-foreground mb-4">
-                Complete activities to get personalized recommendations
+                Complete atividades para receber recomendações personalizadas
               </p>
               <Link href="/dashboard/trails">
-                <Button variant="outline">Explore Learning Trails</Button>
+                <Button variant="outline">Explorar Trilhas de Aprendizado</Button>
               </Link>
             </CardContent>
           </Card>
